@@ -1,8 +1,12 @@
+issue 74019 files
+=======================
+
+For https://github.com/golang/go/issues/74019
+
 # rr binary
 
 rr binary and .so dependencies (https://github.com/glycerine/rr_binary_for_issue74019/raw/refs/heads/master/rr-debuger.tar.gz), for 
 
-https://github.com/golang/go/issues/74019
 
 # original trace
 
