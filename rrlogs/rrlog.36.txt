@@ -1,0 +1,135 @@
+-*- mode: compilation; default-directory: "~/rpc25519/" -*-
+Compilation started at Sat Jun  7 16:36:19
+
+make rr2hr
+go test -race -c -o rpc.test
+rr record -h ./rpc.test -test.v -test.run Test04[05]
+rr: Saving execution to trace directory `/mnt/oldrog/home/jaten/go/src/github.com/glycerine/rr_binary_for_issue74019/rr/rpc.test-36'.
+faketime = false
+=== RUN   Test040_remote_cancel_by_context
+
+cli_test.go:948 [goID 23] 2025-06-07 21:36:20.020593967 +0000 UTC server Start() returned serverAddr = '127.0.0.1:37889'
+
+cli.go:211 [goID 34] 2025-06-07 21:36:20.046975627 +0000 UTC connected to server 127.0.0.1:37889
+
+cli_test.go:982 [goID 23] 2025-06-07 21:36:20.055805966 +0000 UTC cli_test 040: about to block on test040callStarted
+
+cli_test.go:974 [goID 26] 2025-06-07 21:36:20.056079015 +0000 UTC client.Call() goro top about to call over net/rpc: MustBeCancelled.WillHangUntilCancel()
+example.go:300 server-side: WillHangUntilCancel() is running
+example.go:304 net.rpc API: our net.Conn has 
+local = '127.0.0.1:37889'
+remote = '127.0.0.1:54300'
+
+cli_test.go:984 [goID 23] 2025-06-07 21:36:21.195398027 +0000 UTC cli_test 040: we got past test040callStarted
+
+cli_test.go:988 [goID 23] 2025-06-07 21:36:21.195600421 +0000 UTC past cancelFunc()
+example.go:310 MustBeCancelled.WillHangUntilCancel(): ctx.Done() was closed!
+
+cli_test.go:977 [goID 26] 2025-06-07 21:36:21.197672268 +0000 UTC client.Call() returned with cliErr = 'cancellation request sent'
+
+cli_test.go:991 [goID 23] 2025-06-07 21:36:21.197866137 +0000 UTC past cliErrIsSet channel; cliErr40 = 'cancellation request sent'
+
+cli_test.go:998 [goID 23] 2025-06-07 21:36:21.198132834 +0000 UTC about to verify that server side context was cancelled.
+
+cli_test.go:1000 [goID 23] 2025-06-07 21:36:21.198326241 +0000 UTC server side saw the cancellation request: confirmed.
+==================
+WARNING: DATA RACE
+Write at 0x00c1000ce140 by goroutine 21:
+  github.com/glycerine/rpc25519.(*Client).runSendLoop()
+      /home/jaten/rpc25519/cli.go:642 +0xed1
+  github.com/glycerine/rpc25519.(*Client).runClientMain.gowrap2()
+      /home/jaten/rpc25519/cli.go:247 +0x5d
+
+Previous read at 0x00c1000ce140 by goroutine 24:
+  github.com/glycerine/rpc25519.(*Client).oneWaySendHelper()
+      /home/jaten/rpc25519/cli.go:2244 +0x3f9
+  github.com/glycerine/rpc25519.(*Client).SendAndGetReply()
+      /home/jaten/rpc25519/cli.go:1929 +0x1324
+  github.com/glycerine/rpc25519.(*Client).send()
+      /home/jaten/rpc25519/cli.go:1363 +0xc66
+  github.com/glycerine/rpc25519.(*Client).Go()
+      /home/jaten/rpc25519/cli.go:1286 +0x1f3
+  github.com/glycerine/rpc25519.(*Client).Call()
+      /home/jaten/rpc25519/cli.go:1303 +0x12a
+  github.com/glycerine/rpc25519.Test040_remote_cancel_by_context.func1.1()
+      /home/jaten/rpc25519/cli_test.go:976 +0xd4
+
+Goroutine 21 (running) created at:
+  github.com/glycerine/rpc25519.(*Client).runClientMain()
+      /home/jaten/rpc25519/cli.go:247 +0x16ca
+  github.com/glycerine/rpc25519.(*Client).Start.gowrap1()
+      /home/jaten/rpc25519/cli.go:1665 +0x78
+
+Goroutine 24 (finished) created at:
+  github.com/glycerine/rpc25519.Test040_remote_cancel_by_context.func1()
+      /home/jaten/rpc25519/cli_test.go:973 +0x8f1
+  github.com/glycerine/goconvey/convey.discover.parseAction.func1()
+      /home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/discovery.go:80 +0x2e
+  github.com/glycerine/goconvey/convey.(*context).conveyInner()
+      /home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/context.go:264 +0x2d0
+  github.com/glycerine/goconvey/convey.rootConvey.func1()
+      /home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/context.go:113 +0x1a4
+  github.com/jtolds/gls.(*ContextManager).SetValues.func1()
+      /home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/context.go:97 +0x669
+  github.com/jtolds/gls.EnsureGoroutineId.func1()
+      /home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/gid.go:24 +0x38
+  github.com/jtolds/gls._m()
+      /home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/stack_tags.go:108 +0x38
+  github.com/jtolds/gls.github_com_jtolds_gls_markS()
+      /home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/stack_tags.go:56 +0x33
+  github.com/jtolds/gls.addStackTag()
+      /home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/stack_tags.go:49 +0x164
+  github.com/jtolds/gls.EnsureGoroutineId()
+      /home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/gid.go:24 +0xd5
+  github.com/jtolds/gls.(*ContextManager).SetValues()
+      /home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/context.go:63 +0x284
+  github.com/glycerine/goconvey/convey.rootConvey()
+      /home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/context.go:108 +0x464
+  github.com/glycerine/goconvey/convey.Convey()
+      /home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/doc.go:73 +0x9a
+  github.com/glycerine/rpc25519.Test040_remote_cancel_by_context()
+      /home/jaten/rpc25519/cli_test.go:935 +0x10e
+  testing.tRunner()
+      /mnt/oldrog/usr/local/go1.24.3/src/testing/testing.go:1792 +0x225
+  testing.(*T).Run.gowrap1()
+      /mnt/oldrog/usr/local/go1.24.3/src/testing/testing.go:1851 +0x44
+==================
+example.go:324 server-side: MessageAPI_HangUntilCancel() is running
+example.go:326: Message API: our net.Conn has local = '127.0.0.1:37889'; remote = '127.0.0.1:54300'
+
+cli_test.go:1020 [goID 23] 2025-06-07 21:36:21.206172189 +0000 UTC cli_test 041: we got past test041callStarted
+
+cli_test.go:1024 [goID 23] 2025-06-07 21:36:21.206385685 +0000 UTC past cancelFunc()
+example.go: MustBeCancelled.MessageAPI_HangUntilCancel(): ctx.Done() was closed!
+
+cli_test.go:1014 [goID 39] 2025-06-07 21:36:21.208250339 +0000 UTC client.Call() returned with cliErr = 'cancellation request sent'
+
+cli_test.go:1027 [goID 23] 2025-06-07 21:36:21.208454677 +0000 UTC past cliErrIsSet channel; cliErr = 'cancellation request sent'
+
+cli_test.go:1038 [goID 23] 2025-06-07 21:36:21.208653665 +0000 UTC about to verify that server side context was cancelled.
+
+0 assertions thus far
+
+    testing.go:1490: race detected during execution of test
+--- FAIL: Test040_remote_cancel_by_context (1.19s)
+=== RUN   Test045_upload
+
+cli.go:1473 [goID 34] 2025-06-07 21:36:21.212193311 +0000 UTC rpc: client protocol error: 'shutting down'
+
+srv.go:585 [goID 37] 2025-06-07 21:36:21.212475888 +0000 UTC server sees io.EOF from receiveMessage
+
+cli.go:211 [goID 53] 2025-06-07 21:36:21.253745007 +0000 UTC connected to server 127.0.0.1:44135
+
+cli.go:2717 [goID 51] 2025-06-07 21:36:22.427660758 +0000 UTC no simnet, Client made time.NewTimer(dur=1m0s)
+...
+3 assertions thus far
+
+--- PASS: Test045_upload (1.22s)
+FAIL
+make: *** [Makefile:62: rr2hr] Error 1
+
+Compilation exited abnormally with code 2 at Sat Jun  7 16:36:22
+
+jaten@rog ~/rpc25519 (master) $ rr pack
+rr: Packed trace directory `/mnt/oldrog/home/jaten/go/src/github.com/glycerine/rr_binary_for_issue74019/rr/rpc.test-36'.
+

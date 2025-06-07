@@ -1,0 +1,33 @@
+rr: Saving execution to trace directory `/mnt/oldrog/home/jaten/go/src/github.com/glycerine/rr_binary_for_issue74019/rr/rpc.test-139'.
+faketime = false
+=== RUN   Test040_remote_cancel_by_context
+
+cli_test.go:948 [goID 20] 2025-06-07 22:42:14.694722815 +0000 UTC server Start() returned serverAddr = '127.0.0.1:35777'
+
+cli.go:211 [goID 8] 2025-06-07 22:42:14.715436626 +0000 UTC connected to server 127.0.0.1:35777
+
+cli_test.go:982 [goID 20] 2025-06-07 22:42:14.715703413 +0000 UTC cli_test 040: about to block on test040callStarted
+
+cli_test.go:974 [goID 13] 2025-06-07 22:42:14.715895307 +0000 UTC client.Call() goro top about to call over net/rpc: MustBeCancelled.WillHangUntilCancel()
+[FATAL src/RecordCommand.cc:575:handle_SIGSEGV()] rr itself crashed (SIGSEGV). This shouldn't happen!
+=== Start rr backtrace:
+rr(+0xba678)[0x6027d8945678]
+rr(_ZN2rr12FatalOstreamD1Ev+0x6a)[0x6027d894801a]
+rr(+0xefe5a)[0x6027d897ae5a]
+/lib/x86_64-linux-gnu/libc.so.6(+0x45330)[0x7df51ae45330]
+/lib/x86_64-linux-gnu/libc.so.6(+0x1893b4)[0x7df51af893b4]
+rr(_ZN2rr4Task16reset_syscallbufEv+0xd6)[0x6027d8a6cdc6]
+rr(_ZN2rr10RecordTask22maybe_reset_syscallbufEv+0x92)[0x6027d89d8da2]
+rr(_ZN2rr10RecordTask12record_eventENS_5EventENS0_15FlushSyscallbufENS0_20AllowSyscallbufResetEPKNS_9RegistersE+0x83a)[0x6027d89d833a]
+rr(_ZN2rr13RecordSession21syscall_state_changedEPNS_10RecordTaskEPNS0_9StepStateE+0x3a7)[0x6027d8981527]
+rr(_ZN2rr13RecordSession11record_stepEv+0x4c3)[0x6027d898ab93]
+rr(_ZN2rr13RecordCommand3runERSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS7_EE+0x1d2e)[0x6027d8979b9e]
+rr(main+0x35e)[0x6027d895038e]
+/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x7df51ae2a1ca]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x7df51ae2a28b]
+rr(_start+0x25)[0x6027d88c1685]
+=== End rr backtrace
+Aborted (core dumped)
+
+rr: Trace file `/mnt/oldrog/home/jaten/go/src/github.com/glycerine/rr_binary_for_issue74019/rr/rpc.test-139/incomplete' found.
+rr recording terminated abnormally and the trace is incomplete.
