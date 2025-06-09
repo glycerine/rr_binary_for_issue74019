@@ -1536,3 +1536,15 @@ rdi            0x2d6d11601500      49946466194688
 (rr) 
 ~~~
 
+# was that the only bug
+
+No. There are alot of other issues that rr finds. Fortunately
+each issue is accompanied by a trace recording that can be
+used to fully debug each in turn.
+
+I tried applying the lock that gemini suggested on top of go1.24.3
+to lock around the h.setSpans() at mheap.go:1514.
+
+This appears to have supressed the original rpc.test-24 trace issue.
+However 14/100 runs show other issues still. Those [traces](https://github.com/glycerine/rr_binary_for_issue74019/tree/master/traces/heaplocked)
+and [logs](https://github.com/glycerine/rr_binary_for_issue74019/tree/master/heaplock.logs) are available in this repo too.
