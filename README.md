@@ -1551,7 +1551,7 @@ I tried applying the lock that gemini suggested on top of go1.24.3
 to lock around the h.setSpans() at mheap.go:1514.
 
 ~~~
-jaten@rog /usr/local/go1.24.3_heaplock/src/runtime $ diff mheap.go /usr/local/go1.24.3/src/runtime/mheap.go
+/usr/local/go1.24.3_heaplock/src/runtime $ diff mheap.go /usr/local/go1.24.3/src/runtime/mheap.go
 
 1449,1450d1448
 <       lock(&h.lock)
@@ -1559,6 +1559,10 @@ jaten@rog /usr/local/go1.24.3_heaplock/src/runtime $ diff mheap.go /usr/local/go
 1470,1471d1467
 <
 <       unlock(&h.lock)
+
+# build new test binary:
+~/rpc25519 (master) $ export GOROOT=/usr/local/go1.24.3_heaplock
+~/rpc25519 (master) $ go-heaplock test -race -c -o rpc.test.heaplock
 ~~~
 
 This appears to have supressed the original rpc.test-24 trace issue.
@@ -1568,7 +1572,7 @@ and [logs](https://github.com/glycerine/rr_binary_for_issue74019/tree/master/hea
 This was the script that produced them:
 
 ~~~
-jaten@rog ~/rpc25519 (master) $ cat do.chaos
+~/rpc25519 (master) $ cat do.chaos
 #!/bin/bash
 
 for i in `seq 0 100`; do
