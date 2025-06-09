@@ -90,7 +90,10 @@ is the saved output of the gemini session
 by Chrome's File->Save Page As -> Webpage, single file.
 
 (I don't know how to share gemini sessions otherwise;
-if there are tricks, let me know).
+if there are tricks, let me know. update: Ah, I see. 
+I had Sessions off due to privacy concerns when
+it was discussed last year. Apparently
+sessions are what you need on in order to share a chat).
 
 Now back to the story...
 
