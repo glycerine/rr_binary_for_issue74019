@@ -1,0 +1,1394 @@
+faketime = false
+=== RUN   Test040_remote_cancel_by_context
+
+cli_test.go:948 [goID 23] 2025-06-09 01:38:58.989851918 +0000 UTC server Start() returned serverAddr = '127.0.0.1:32905'
+
+cli.go:211 [goID 34] 2025-06-09 01:38:59.010412168 +0000 UTC connected to server 127.0.0.1:32905
+runtime: marked free object in span 0x1166750f5368, elemsize=8 freeindex=0 (bad use of unsafe.Pointer or having race conditions? try -d=checkptr or -race)
+0xc00013e000 free  unmarked
+0xc00013e008 free  unmarked
+0xc00013e010 free  unmarked
+0xc00013e018 free  unmarked
+0xc00013e020 free  unmarked
+0xc00013e028 free  marked   zombie
+0x000000c00013e028:  0x000000c000138280 
+0xc00013e030 free  marked   zombie
+0x000000c00013e030:  0x000000c0001382a0 
+0xc00013e038 free  unmarked
+0xc00013e040 free  marked   zombie
+0x000000c00013e040:  0x000000c000140050 
+0xc00013e048 free  unmarked
+0xc00013e050 free  unmarked
+0xc00013e058 free  marked   zombie
+0x000000c00013e058:  0x000000c0001400a0 
+0xc00013e060 free  unmarked
+0xc00013e068 free  unmarked
+0xc00013e070 free  unmarked
+0xc00013e078 free  unmarked
+0xc00013e080 free  unmarked
+0xc00013e088 free  unmarked
+0xc00013e090 free  marked   zombie
+0x000000c00013e090:  0x000000c000140140 
+0xc00013e098 free  unmarked
+0xc00013e0a0 free  unmarked
+0xc00013e0a8 free  unmarked
+0xc00013e0b0 free  unmarked
+0xc00013e0b8 free  unmarked
+0xc00013e0c0 free  unmarked
+0xc00013e0c8 free  marked   zombie
+0x000000c00013e0c8:  0x000000c000110240 
+0xc00013e0d0 free  unmarked
+0xc00013e0d8 free  unmarked
+0xc00013e0e0 free  marked   zombie
+0x000000c00013e0e0:  0x000000c0001102a0 
+0xc00013e0e8 free  marked   zombie
+0x000000c00013e0e8:  0x0000000000ea1660 <github.com/glycerine/rpc25519.(*MustBeCancelled).MessageAPI_HangUntilCancel+0x0000000000000000> 
+0xc00013e0f0 free  unmarked
+0xc00013e0f8 free  marked   zombie
+0x000000c00013e0f8:  0x000000c000140230 
+0xc00013e100 free  unmarked
+0xc00013e108 free  unmarked
+0xc00013e110 free  unmarked
+0xc00013e118 free  unmarked
+0xc00013e120 free  unmarked
+0xc00013e128 free  unmarked
+0xc00013e130 free  unmarked
+0xc00013e138 free  marked   zombie
+0x000000c00013e138:  0x000000c000110420 
+0xc00013e140 free  unmarked
+0xc00013e148 free  unmarked
+0xc00013e150 free  marked   zombie
+0x000000c00013e150:  0x000000c000110480 
+0xc00013e158 free  unmarked
+0xc00013e160 free  unmarked
+0xc00013e168 free  unmarked
+0xc00013e170 free  unmarked
+0xc00013e178 free  unmarked
+0xc00013e180 free  unmarked
+0xc00013e188 free  unmarked
+0xc00013e190 free  unmarked
+0xc00013e198 free  unmarked
+0xc00013e1a0 free  marked   zombie
+0x000000c00013e1a0:  0x0000000000ea11a0 <github.com/glycerine/rpc25519.(*MustBeCancelled).WillHangUntilCancel+0x0000000000000000> 
+0xc00013e1a8 free  unmarked
+0xc00013e1b0 free  unmarked
+0xc00013e1b8 free  unmarked
+0xc00013e1c0 free  marked   zombie
+0x000000c00013e1c0:  0x000000c00014c380 
+0xc00013e1c8 free  unmarked
+0xc00013e1d0 free  unmarked
+0xc00013e1d8 free  unmarked
+0xc00013e1e0 free  unmarked
+0xc00013e1e8 free  unmarked
+0xc00013e1f0 free  unmarked
+0xc00013e1f8 free  unmarked
+0xc00013e200 free  unmarked
+0xc00013e208 free  unmarked
+0xc00013e210 free  unmarked
+0xc00013e218 free  unmarked
+0xc00013e220 free  unmarked
+0xc00013e228 free  unmarked
+0xc00013e230 free  unmarked
+0xc00013e238 free  unmarked
+0xc00013e240 free  unmarked
+0xc00013e248 free  unmarked
+0xc00013e250 free  unmarked
+0xc00013e258 free  unmarked
+0xc00013e260 free  unmarked
+0xc00013e268 free  unmarked
+0xc00013e270 free  unmarked
+0xc00013e278 free  unmarked
+0xc00013e280 free  unmarked
+0xc00013e288 free  unmarked
+0xc00013e290 free  unmarked
+0xc00013e298 free  unmarked
+0xc00013e2a0 free  unmarked
+0xc00013e2a8 free  unmarked
+0xc00013e2b0 free  unmarked
+0xc00013e2b8 free  unmarked
+0xc00013e2c0 free  unmarked
+0xc00013e2c8 free  unmarked
+0xc00013e2d0 free  unmarked
+0xc00013e2d8 free  unmarked
+0xc00013e2e0 free  unmarked
+0xc00013e2e8 free  unmarked
+0xc00013e2f0 free  unmarked
+0xc00013e2f8 free  unmarked
+0xc00013e300 free  unmarked
+0xc00013e308 free  unmarked
+0xc00013e310 free  unmarked
+0xc00013e318 free  unmarked
+0xc00013e320 free  unmarked
+0xc00013e328 free  unmarked
+0xc00013e330 free  unmarked
+0xc00013e338 free  unmarked
+0xc00013e340 free  unmarked
+0xc00013e348 free  unmarked
+0xc00013e350 free  unmarked
+0xc00013e358 free  unmarked
+0xc00013e360 free  unmarked
+0xc00013e368 free  unmarked
+0xc00013e370 free  unmarked
+0xc00013e378 free  unmarked
+0xc00013e380 free  unmarked
+0xc00013e388 free  unmarked
+0xc00013e390 free  unmarked
+0xc00013e398 free  unmarked
+0xc00013e3a0 free  unmarked
+0xc00013e3a8 free  unmarked
+0xc00013e3b0 free  unmarked
+0xc00013e3b8 free  unmarked
+0xc00013e3c0 free  unmarked
+0xc00013e3c8 free  unmarked
+0xc00013e3d0 free  unmarked
+0xc00013e3d8 free  unmarked
+0xc00013e3e0 free  unmarked
+0xc00013e3e8 free  unmarked
+0xc00013e3f0 free  unmarked
+0xc00013e3f8 free  unmarked
+0xc00013e400 free  unmarked
+0xc00013e408 free  unmarked
+0xc00013e410 free  unmarked
+0xc00013e418 free  unmarked
+0xc00013e420 free  unmarked
+0xc00013e428 free  unmarked
+0xc00013e430 free  unmarked
+0xc00013e438 free  unmarked
+0xc00013e440 free  unmarked
+0xc00013e448 free  unmarked
+0xc00013e450 free  unmarked
+0xc00013e458 free  unmarked
+0xc00013e460 free  unmarked
+0xc00013e468 free  unmarked
+0xc00013e470 free  unmarked
+0xc00013e478 free  unmarked
+0xc00013e480 free  unmarked
+0xc00013e488 free  unmarked
+0xc00013e490 free  unmarked
+0xc00013e498 free  unmarked
+0xc00013e4a0 free  unmarked
+0xc00013e4a8 free  unmarked
+0xc00013e4b0 free  unmarked
+0xc00013e4b8 free  unmarked
+0xc00013e4c0 free  unmarked
+0xc00013e4c8 free  unmarked
+0xc00013e4d0 free  unmarked
+0xc00013e4d8 free  unmarked
+0xc00013e4e0 free  unmarked
+0xc00013e4e8 free  unmarked
+0xc00013e4f0 free  unmarked
+0xc00013e4f8 free  unmarked
+0xc00013e500 free  unmarked
+0xc00013e508 free  unmarked
+0xc00013e510 free  unmarked
+0xc00013e518 free  unmarked
+0xc00013e520 free  unmarked
+0xc00013e528 free  unmarked
+0xc00013e530 free  unmarked
+0xc00013e538 free  unmarked
+0xc00013e540 free  unmarked
+0xc00013e548 free  unmarked
+0xc00013e550 free  unmarked
+0xc00013e558 free  unmarked
+0xc00013e560 free  unmarked
+0xc00013e568 free  unmarked
+0xc00013e570 free  unmarked
+0xc00013e578 free  unmarked
+0xc00013e580 free  unmarked
+0xc00013e588 free  unmarked
+0xc00013e590 free  unmarked
+0xc00013e598 free  unmarked
+0xc00013e5a0 free  unmarked
+0xc00013e5a8 free  unmarked
+0xc00013e5b0 free  unmarked
+0xc00013e5b8 free  unmarked
+0xc00013e5c0 free  unmarked
+0xc00013e5c8 free  unmarked
+0xc00013e5d0 free  unmarked
+0xc00013e5d8 free  unmarked
+0xc00013e5e0 free  unmarked
+0xc00013e5e8 free  unmarked
+0xc00013e5f0 free  unmarked
+0xc00013e5f8 free  unmarked
+0xc00013e600 free  unmarked
+0xc00013e608 free  unmarked
+0xc00013e610 free  unmarked
+0xc00013e618 free  unmarked
+0xc00013e620 free  unmarked
+0xc00013e628 free  unmarked
+0xc00013e630 free  unmarked
+0xc00013e638 free  unmarked
+0xc00013e640 free  unmarked
+0xc00013e648 free  unmarked
+0xc00013e650 free  unmarked
+0xc00013e658 free  unmarked
+0xc00013e660 free  unmarked
+0xc00013e668 free  unmarked
+0xc00013e670 free  unmarked
+0xc00013e678 free  unmarked
+0xc00013e680 free  unmarked
+0xc00013e688 free  unmarked
+0xc00013e690 free  unmarked
+0xc00013e698 free  unmarked
+0xc00013e6a0 free  unmarked
+0xc00013e6a8 free  unmarked
+0xc00013e6b0 free  unmarked
+0xc00013e6b8 free  unmarked
+0xc00013e6c0 free  unmarked
+0xc00013e6c8 free  unmarked
+0xc00013e6d0 free  unmarked
+0xc00013e6d8 free  unmarked
+0xc00013e6e0 free  unmarked
+0xc00013e6e8 free  unmarked
+0xc00013e6f0 free  unmarked
+0xc00013e6f8 free  unmarked
+0xc00013e700 free  unmarked
+0xc00013e708 free  unmarked
+0xc00013e710 free  unmarked
+0xc00013e718 free  unmarked
+0xc00013e720 free  unmarked
+0xc00013e728 free  unmarked
+0xc00013e730 free  unmarked
+0xc00013e738 free  unmarked
+0xc00013e740 free  unmarked
+0xc00013e748 free  unmarked
+0xc00013e750 free  unmarked
+0xc00013e758 free  unmarked
+0xc00013e760 free  unmarked
+0xc00013e768 free  unmarked
+0xc00013e770 free  unmarked
+0xc00013e778 free  unmarked
+0xc00013e780 free  unmarked
+0xc00013e788 free  unmarked
+0xc00013e790 free  unmarked
+0xc00013e798 free  unmarked
+0xc00013e7a0 free  unmarked
+0xc00013e7a8 free  unmarked
+0xc00013e7b0 free  unmarked
+0xc00013e7b8 free  unmarked
+0xc00013e7c0 free  unmarked
+0xc00013e7c8 free  unmarked
+0xc00013e7d0 free  unmarked
+0xc00013e7d8 free  unmarked
+0xc00013e7e0 free  unmarked
+0xc00013e7e8 free  unmarked
+0xc00013e7f0 free  unmarked
+0xc00013e7f8 free  unmarked
+0xc00013e800 free  unmarked
+0xc00013e808 free  unmarked
+0xc00013e810 free  unmarked
+0xc00013e818 free  unmarked
+0xc00013e820 free  unmarked
+0xc00013e828 free  unmarked
+0xc00013e830 free  unmarked
+0xc00013e838 free  unmarked
+0xc00013e840 free  unmarked
+0xc00013e848 free  unmarked
+0xc00013e850 free  unmarked
+0xc00013e858 free  unmarked
+0xc00013e860 free  unmarked
+0xc00013e868 free  unmarked
+0xc00013e870 free  unmarked
+0xc00013e878 free  unmarked
+0xc00013e880 free  unmarked
+0xc00013e888 free  unmarked
+0xc00013e890 free  unmarked
+0xc00013e898 free  unmarked
+0xc00013e8a0 free  unmarked
+0xc00013e8a8 free  unmarked
+0xc00013e8b0 free  unmarked
+0xc00013e8b8 free  unmarked
+0xc00013e8c0 free  unmarked
+0xc00013e8c8 free  unmarked
+0xc00013e8d0 free  unmarked
+0xc00013e8d8 free  unmarked
+0xc00013e8e0 free  unmarked
+0xc00013e8e8 free  unmarked
+0xc00013e8f0 free  unmarked
+0xc00013e8f8 free  unmarked
+0xc00013e900 free  unmarked
+0xc00013e908 free  unmarked
+0xc00013e910 free  unmarked
+0xc00013e918 free  unmarked
+0xc00013e920 free  unmarked
+0xc00013e928 free  unmarked
+0xc00013e930 free  unmarked
+0xc00013e938 free  unmarked
+0xc00013e940 free  unmarked
+0xc00013e948 free  unmarked
+0xc00013e950 free  unmarked
+0xc00013e958 free  unmarked
+0xc00013e960 free  unmarked
+0xc00013e968 free  unmarked
+0xc00013e970 free  unmarked
+0xc00013e978 free  unmarked
+0xc00013e980 free  unmarked
+0xc00013e988 free  unmarked
+0xc00013e990 free  unmarked
+0xc00013e998 free  unmarked
+0xc00013e9a0 free  unmarked
+0xc00013e9a8 free  unmarked
+0xc00013e9b0 free  unmarked
+0xc00013e9b8 free  unmarked
+0xc00013e9c0 free  unmarked
+0xc00013e9c8 free  unmarked
+0xc00013e9d0 free  unmarked
+0xc00013e9d8 free  unmarked
+0xc00013e9e0 free  unmarked
+0xc00013e9e8 free  unmarked
+0xc00013e9f0 free  unmarked
+0xc00013e9f8 free  unmarked
+0xc00013ea00 free  unmarked
+0xc00013ea08 free  unmarked
+0xc00013ea10 free  unmarked
+0xc00013ea18 free  unmarked
+0xc00013ea20 free  unmarked
+0xc00013ea28 free  unmarked
+0xc00013ea30 free  unmarked
+0xc00013ea38 free  unmarked
+0xc00013ea40 free  unmarked
+0xc00013ea48 free  unmarked
+0xc00013ea50 free  unmarked
+0xc00013ea58 free  unmarked
+0xc00013ea60 free  unmarked
+0xc00013ea68 free  unmarked
+0xc00013ea70 free  unmarked
+0xc00013ea78 free  unmarked
+0xc00013ea80 free  unmarked
+0xc00013ea88 free  unmarked
+0xc00013ea90 free  unmarked
+0xc00013ea98 free  unmarked
+0xc00013eaa0 free  unmarked
+0xc00013eaa8 free  unmarked
+0xc00013eab0 free  unmarked
+0xc00013eab8 free  unmarked
+0xc00013eac0 free  unmarked
+0xc00013eac8 free  unmarked
+0xc00013ead0 free  unmarked
+0xc00013ead8 free  unmarked
+0xc00013eae0 free  unmarked
+0xc00013eae8 free  unmarked
+0xc00013eaf0 free  unmarked
+0xc00013eaf8 free  unmarked
+0xc00013eb00 free  unmarked
+0xc00013eb08 free  unmarked
+0xc00013eb10 free  unmarked
+0xc00013eb18 free  unmarked
+0xc00013eb20 free  unmarked
+0xc00013eb28 free  unmarked
+0xc00013eb30 free  unmarked
+0xc00013eb38 free  unmarked
+0xc00013eb40 free  unmarked
+0xc00013eb48 free  unmarked
+0xc00013eb50 free  unmarked
+0xc00013eb58 free  unmarked
+0xc00013eb60 free  unmarked
+0xc00013eb68 free  unmarked
+0xc00013eb70 free  unmarked
+0xc00013eb78 free  unmarked
+0xc00013eb80 free  unmarked
+0xc00013eb88 free  unmarked
+0xc00013eb90 free  unmarked
+0xc00013eb98 free  unmarked
+0xc00013eba0 free  unmarked
+0xc00013eba8 free  unmarked
+0xc00013ebb0 free  unmarked
+0xc00013ebb8 free  unmarked
+0xc00013ebc0 free  unmarked
+0xc00013ebc8 free  unmarked
+0xc00013ebd0 free  unmarked
+0xc00013ebd8 free  unmarked
+0xc00013ebe0 free  unmarked
+0xc00013ebe8 free  unmarked
+0xc00013ebf0 free  unmarked
+0xc00013ebf8 free  unmarked
+0xc00013ec00 free  unmarked
+0xc00013ec08 free  unmarked
+0xc00013ec10 free  unmarked
+0xc00013ec18 free  unmarked
+0xc00013ec20 free  unmarked
+0xc00013ec28 free  unmarked
+0xc00013ec30 free  unmarked
+0xc00013ec38 free  unmarked
+0xc00013ec40 free  unmarked
+0xc00013ec48 free  unmarked
+0xc00013ec50 free  unmarked
+0xc00013ec58 free  unmarked
+0xc00013ec60 free  unmarked
+0xc00013ec68 free  unmarked
+0xc00013ec70 free  unmarked
+0xc00013ec78 free  unmarked
+0xc00013ec80 free  unmarked
+0xc00013ec88 free  unmarked
+0xc00013ec90 free  unmarked
+0xc00013ec98 free  unmarked
+0xc00013eca0 free  unmarked
+0xc00013eca8 free  unmarked
+0xc00013ecb0 free  unmarked
+0xc00013ecb8 free  unmarked
+0xc00013ecc0 free  unmarked
+0xc00013ecc8 free  unmarked
+0xc00013ecd0 free  unmarked
+0xc00013ecd8 free  unmarked
+0xc00013ece0 free  unmarked
+0xc00013ece8 free  unmarked
+0xc00013ecf0 free  unmarked
+0xc00013ecf8 free  unmarked
+0xc00013ed00 free  unmarked
+0xc00013ed08 free  unmarked
+0xc00013ed10 free  unmarked
+0xc00013ed18 free  unmarked
+0xc00013ed20 free  unmarked
+0xc00013ed28 free  unmarked
+0xc00013ed30 free  unmarked
+0xc00013ed38 free  unmarked
+0xc00013ed40 free  unmarked
+0xc00013ed48 free  unmarked
+0xc00013ed50 free  unmarked
+0xc00013ed58 free  unmarked
+0xc00013ed60 free  unmarked
+0xc00013ed68 free  unmarked
+0xc00013ed70 free  unmarked
+0xc00013ed78 free  unmarked
+0xc00013ed80 free  unmarked
+0xc00013ed88 free  unmarked
+0xc00013ed90 free  unmarked
+0xc00013ed98 free  unmarked
+0xc00013eda0 free  unmarked
+0xc00013eda8 free  unmarked
+0xc00013edb0 free  unmarked
+0xc00013edb8 free  unmarked
+0xc00013edc0 free  unmarked
+0xc00013edc8 free  unmarked
+0xc00013edd0 free  unmarked
+0xc00013edd8 free  unmarked
+0xc00013ede0 free  unmarked
+0xc00013ede8 free  unmarked
+0xc00013edf0 free  unmarked
+0xc00013edf8 free  unmarked
+0xc00013ee00 free  unmarked
+0xc00013ee08 free  unmarked
+0xc00013ee10 free  unmarked
+0xc00013ee18 free  unmarked
+0xc00013ee20 free  unmarked
+0xc00013ee28 free  unmarked
+0xc00013ee30 free  unmarked
+0xc00013ee38 free  unmarked
+0xc00013ee40 free  unmarked
+0xc00013ee48 free  unmarked
+0xc00013ee50 free  unmarked
+0xc00013ee58 free  unmarked
+0xc00013ee60 free  unmarked
+0xc00013ee68 free  unmarked
+0xc00013ee70 free  unmarked
+0xc00013ee78 free  unmarked
+0xc00013ee80 free  unmarked
+0xc00013ee88 free  unmarked
+0xc00013ee90 free  unmarked
+0xc00013ee98 free  unmarked
+0xc00013eea0 free  unmarked
+0xc00013eea8 free  unmarked
+0xc00013eeb0 free  unmarked
+0xc00013eeb8 free  unmarked
+0xc00013eec0 free  unmarked
+0xc00013eec8 free  unmarked
+0xc00013eed0 free  unmarked
+0xc00013eed8 free  unmarked
+0xc00013eee0 free  unmarked
+0xc00013eee8 free  unmarked
+0xc00013eef0 free  unmarked
+0xc00013eef8 free  unmarked
+0xc00013ef00 free  unmarked
+0xc00013ef08 free  unmarked
+0xc00013ef10 free  unmarked
+0xc00013ef18 free  unmarked
+0xc00013ef20 free  unmarked
+0xc00013ef28 free  unmarked
+0xc00013ef30 free  unmarked
+0xc00013ef38 free  unmarked
+0xc00013ef40 free  unmarked
+0xc00013ef48 free  unmarked
+0xc00013ef50 free  unmarked
+0xc00013ef58 free  unmarked
+0xc00013ef60 free  unmarked
+0xc00013ef68 free  unmarked
+0xc00013ef70 free  unmarked
+0xc00013ef78 free  unmarked
+0xc00013ef80 free  unmarked
+0xc00013ef88 free  unmarked
+0xc00013ef90 free  unmarked
+0xc00013ef98 free  unmarked
+0xc00013efa0 free  unmarked
+0xc00013efa8 free  unmarked
+0xc00013efb0 free  unmarked
+0xc00013efb8 free  unmarked
+0xc00013efc0 free  unmarked
+0xc00013efc8 free  unmarked
+0xc00013efd0 free  unmarked
+0xc00013efd8 free  unmarked
+0xc00013efe0 free  unmarked
+0xc00013efe8 free  unmarked
+0xc00013eff0 free  unmarked
+0xc00013eff8 free  unmarked
+0xc00013f000 free  unmarked
+0xc00013f008 free  unmarked
+0xc00013f010 free  unmarked
+0xc00013f018 free  unmarked
+0xc00013f020 free  unmarked
+0xc00013f028 free  unmarked
+0xc00013f030 free  unmarked
+0xc00013f038 free  unmarked
+0xc00013f040 free  unmarked
+0xc00013f048 free  unmarked
+0xc00013f050 free  unmarked
+0xc00013f058 free  unmarked
+0xc00013f060 free  unmarked
+0xc00013f068 free  unmarked
+0xc00013f070 free  unmarked
+0xc00013f078 free  unmarked
+0xc00013f080 free  unmarked
+0xc00013f088 free  unmarked
+0xc00013f090 free  unmarked
+0xc00013f098 free  unmarked
+0xc00013f0a0 free  unmarked
+0xc00013f0a8 free  unmarked
+0xc00013f0b0 free  unmarked
+0xc00013f0b8 free  unmarked
+0xc00013f0c0 free  unmarked
+0xc00013f0c8 free  unmarked
+0xc00013f0d0 free  unmarked
+0xc00013f0d8 free  unmarked
+0xc00013f0e0 free  unmarked
+0xc00013f0e8 free  unmarked
+0xc00013f0f0 free  unmarked
+0xc00013f0f8 free  unmarked
+0xc00013f100 free  unmarked
+0xc00013f108 free  unmarked
+0xc00013f110 free  unmarked
+0xc00013f118 free  unmarked
+0xc00013f120 free  unmarked
+0xc00013f128 free  unmarked
+0xc00013f130 free  unmarked
+0xc00013f138 free  unmarked
+0xc00013f140 free  unmarked
+0xc00013f148 free  unmarked
+0xc00013f150 free  unmarked
+0xc00013f158 free  unmarked
+0xc00013f160 free  unmarked
+0xc00013f168 free  unmarked
+0xc00013f170 free  unmarked
+0xc00013f178 free  unmarked
+0xc00013f180 free  unmarked
+0xc00013f188 free  unmarked
+0xc00013f190 free  unmarked
+0xc00013f198 free  unmarked
+0xc00013f1a0 free  unmarked
+0xc00013f1a8 free  unmarked
+0xc00013f1b0 free  unmarked
+0xc00013f1b8 free  unmarked
+0xc00013f1c0 free  unmarked
+0xc00013f1c8 free  unmarked
+0xc00013f1d0 free  unmarked
+0xc00013f1d8 free  unmarked
+0xc00013f1e0 free  unmarked
+0xc00013f1e8 free  unmarked
+0xc00013f1f0 free  unmarked
+0xc00013f1f8 free  unmarked
+0xc00013f200 free  unmarked
+0xc00013f208 free  unmarked
+0xc00013f210 free  unmarked
+0xc00013f218 free  unmarked
+0xc00013f220 free  unmarked
+0xc00013f228 free  unmarked
+0xc00013f230 free  unmarked
+0xc00013f238 free  unmarked
+0xc00013f240 free  unmarked
+0xc00013f248 free  unmarked
+0xc00013f250 free  unmarked
+0xc00013f258 free  unmarked
+0xc00013f260 free  unmarked
+0xc00013f268 free  unmarked
+0xc00013f270 free  unmarked
+0xc00013f278 free  unmarked
+0xc00013f280 free  unmarked
+0xc00013f288 free  unmarked
+0xc00013f290 free  unmarked
+0xc00013f298 free  unmarked
+0xc00013f2a0 free  unmarked
+0xc00013f2a8 free  unmarked
+0xc00013f2b0 free  unmarked
+0xc00013f2b8 free  unmarked
+0xc00013f2c0 free  unmarked
+0xc00013f2c8 free  unmarked
+0xc00013f2d0 free  unmarked
+0xc00013f2d8 free  unmarked
+0xc00013f2e0 free  unmarked
+0xc00013f2e8 free  unmarked
+0xc00013f2f0 free  unmarked
+0xc00013f2f8 free  unmarked
+0xc00013f300 free  unmarked
+0xc00013f308 free  unmarked
+0xc00013f310 free  unmarked
+0xc00013f318 free  unmarked
+0xc00013f320 free  unmarked
+0xc00013f328 free  unmarked
+0xc00013f330 free  unmarked
+0xc00013f338 free  unmarked
+0xc00013f340 free  unmarked
+0xc00013f348 free  unmarked
+0xc00013f350 free  unmarked
+0xc00013f358 free  unmarked
+0xc00013f360 free  unmarked
+0xc00013f368 free  unmarked
+0xc00013f370 free  unmarked
+0xc00013f378 free  unmarked
+0xc00013f380 free  unmarked
+0xc00013f388 free  unmarked
+0xc00013f390 free  unmarked
+0xc00013f398 free  unmarked
+0xc00013f3a0 free  unmarked
+0xc00013f3a8 free  unmarked
+0xc00013f3b0 free  unmarked
+0xc00013f3b8 free  unmarked
+0xc00013f3c0 free  unmarked
+0xc00013f3c8 free  unmarked
+0xc00013f3d0 free  unmarked
+0xc00013f3d8 free  unmarked
+0xc00013f3e0 free  unmarked
+0xc00013f3e8 free  unmarked
+0xc00013f3f0 free  unmarked
+0xc00013f3f8 free  unmarked
+0xc00013f400 free  unmarked
+0xc00013f408 free  unmarked
+0xc00013f410 free  unmarked
+0xc00013f418 free  unmarked
+0xc00013f420 free  unmarked
+0xc00013f428 free  unmarked
+0xc00013f430 free  unmarked
+0xc00013f438 free  unmarked
+0xc00013f440 free  unmarked
+0xc00013f448 free  unmarked
+0xc00013f450 free  unmarked
+0xc00013f458 free  unmarked
+0xc00013f460 free  unmarked
+0xc00013f468 free  unmarked
+0xc00013f470 free  unmarked
+0xc00013f478 free  unmarked
+0xc00013f480 free  unmarked
+0xc00013f488 free  unmarked
+0xc00013f490 free  unmarked
+0xc00013f498 free  unmarked
+0xc00013f4a0 free  unmarked
+0xc00013f4a8 free  unmarked
+0xc00013f4b0 free  unmarked
+0xc00013f4b8 free  unmarked
+0xc00013f4c0 free  unmarked
+0xc00013f4c8 free  unmarked
+0xc00013f4d0 free  unmarked
+0xc00013f4d8 free  unmarked
+0xc00013f4e0 free  unmarked
+0xc00013f4e8 free  unmarked
+0xc00013f4f0 free  unmarked
+0xc00013f4f8 free  unmarked
+0xc00013f500 free  unmarked
+0xc00013f508 free  unmarked
+0xc00013f510 free  unmarked
+0xc00013f518 free  unmarked
+0xc00013f520 free  unmarked
+0xc00013f528 free  unmarked
+0xc00013f530 free  unmarked
+0xc00013f538 free  unmarked
+0xc00013f540 free  unmarked
+0xc00013f548 free  unmarked
+0xc00013f550 free  unmarked
+0xc00013f558 free  unmarked
+0xc00013f560 free  unmarked
+0xc00013f568 free  unmarked
+0xc00013f570 free  unmarked
+0xc00013f578 free  unmarked
+0xc00013f580 free  unmarked
+0xc00013f588 free  unmarked
+0xc00013f590 free  unmarked
+0xc00013f598 free  unmarked
+0xc00013f5a0 free  unmarked
+0xc00013f5a8 free  unmarked
+0xc00013f5b0 free  unmarked
+0xc00013f5b8 free  unmarked
+0xc00013f5c0 free  unmarked
+0xc00013f5c8 free  unmarked
+0xc00013f5d0 free  unmarked
+0xc00013f5d8 free  unmarked
+0xc00013f5e0 free  unmarked
+0xc00013f5e8 free  unmarked
+0xc00013f5f0 free  unmarked
+0xc00013f5f8 free  unmarked
+0xc00013f600 free  unmarked
+0xc00013f608 free  unmarked
+0xc00013f610 free  unmarked
+0xc00013f618 free  unmarked
+0xc00013f620 free  unmarked
+0xc00013f628 free  unmarked
+0xc00013f630 free  unmarked
+0xc00013f638 free  unmarked
+0xc00013f640 free  unmarked
+0xc00013f648 free  unmarked
+0xc00013f650 free  unmarked
+0xc00013f658 free  unmarked
+0xc00013f660 free  unmarked
+0xc00013f668 free  unmarked
+0xc00013f670 free  unmarked
+0xc00013f678 free  unmarked
+0xc00013f680 free  unmarked
+0xc00013f688 free  unmarked
+0xc00013f690 free  unmarked
+0xc00013f698 free  unmarked
+0xc00013f6a0 free  unmarked
+0xc00013f6a8 free  unmarked
+0xc00013f6b0 free  unmarked
+0xc00013f6b8 free  unmarked
+0xc00013f6c0 free  unmarked
+0xc00013f6c8 free  unmarked
+0xc00013f6d0 free  unmarked
+0xc00013f6d8 free  unmarked
+0xc00013f6e0 free  unmarked
+0xc00013f6e8 free  unmarked
+0xc00013f6f0 free  unmarked
+0xc00013f6f8 free  unmarked
+0xc00013f700 free  unmarked
+0xc00013f708 free  unmarked
+0xc00013f710 free  unmarked
+0xc00013f718 free  unmarked
+0xc00013f720 free  unmarked
+0xc00013f728 free  unmarked
+0xc00013f730 free  unmarked
+0xc00013f738 free  unmarked
+0xc00013f740 free  unmarked
+0xc00013f748 free  unmarked
+0xc00013f750 free  unmarked
+0xc00013f758 free  unmarked
+0xc00013f760 free  unmarked
+0xc00013f768 free  unmarked
+0xc00013f770 free  unmarked
+0xc00013f778 free  unmarked
+0xc00013f780 free  unmarked
+0xc00013f788 free  unmarked
+0xc00013f790 free  unmarked
+0xc00013f798 free  unmarked
+0xc00013f7a0 free  unmarked
+0xc00013f7a8 free  unmarked
+0xc00013f7b0 free  unmarked
+0xc00013f7b8 free  unmarked
+0xc00013f7c0 free  unmarked
+0xc00013f7c8 free  unmarked
+0xc00013f7d0 free  unmarked
+0xc00013f7d8 free  unmarked
+0xc00013f7e0 free  unmarked
+0xc00013f7e8 free  unmarked
+0xc00013f7f0 free  unmarked
+0xc00013f7f8 free  unmarked
+0xc00013f800 free  unmarked
+0xc00013f808 free  unmarked
+0xc00013f810 free  unmarked
+0xc00013f818 free  unmarked
+0xc00013f820 free  unmarked
+0xc00013f828 free  unmarked
+0xc00013f830 free  unmarked
+0xc00013f838 free  unmarked
+0xc00013f840 free  unmarked
+0xc00013f848 free  unmarked
+0xc00013f850 free  unmarked
+0xc00013f858 free  unmarked
+0xc00013f860 free  unmarked
+0xc00013f868 free  unmarked
+0xc00013f870 free  unmarked
+0xc00013f878 free  unmarked
+0xc00013f880 free  unmarked
+0xc00013f888 free  unmarked
+0xc00013f890 free  unmarked
+0xc00013f898 free  unmarked
+0xc00013f8a0 free  unmarked
+0xc00013f8a8 free  unmarked
+0xc00013f8b0 free  unmarked
+0xc00013f8b8 free  unmarked
+0xc00013f8c0 free  unmarked
+0xc00013f8c8 free  unmarked
+0xc00013f8d0 free  unmarked
+0xc00013f8d8 free  unmarked
+0xc00013f8e0 free  unmarked
+0xc00013f8e8 free  unmarked
+0xc00013f8f0 free  unmarked
+0xc00013f8f8 free  unmarked
+0xc00013f900 free  unmarked
+0xc00013f908 free  unmarked
+0xc00013f910 free  unmarked
+0xc00013f918 free  unmarked
+0xc00013f920 free  unmarked
+0xc00013f928 free  unmarked
+0xc00013f930 free  unmarked
+0xc00013f938 free  unmarked
+0xc00013f940 free  unmarked
+0xc00013f948 free  unmarked
+0xc00013f950 free  unmarked
+0xc00013f958 free  unmarked
+0xc00013f960 free  unmarked
+0xc00013f968 free  unmarked
+0xc00013f970 free  unmarked
+0xc00013f978 free  unmarked
+0xc00013f980 free  unmarked
+0xc00013f988 free  unmarked
+0xc00013f990 free  unmarked
+0xc00013f998 free  unmarked
+0xc00013f9a0 free  unmarked
+0xc00013f9a8 free  unmarked
+0xc00013f9b0 free  unmarked
+0xc00013f9b8 free  unmarked
+0xc00013f9c0 free  unmarked
+0xc00013f9c8 free  unmarked
+0xc00013f9d0 free  unmarked
+0xc00013f9d8 free  unmarked
+0xc00013f9e0 free  unmarked
+0xc00013f9e8 free  unmarked
+0xc00013f9f0 free  unmarked
+0xc00013f9f8 free  unmarked
+0xc00013fa00 free  unmarked
+0xc00013fa08 free  unmarked
+0xc00013fa10 free  unmarked
+0xc00013fa18 free  unmarked
+0xc00013fa20 free  unmarked
+0xc00013fa28 free  unmarked
+0xc00013fa30 free  unmarked
+0xc00013fa38 free  unmarked
+0xc00013fa40 free  unmarked
+0xc00013fa48 free  unmarked
+0xc00013fa50 free  unmarked
+0xc00013fa58 free  unmarked
+0xc00013fa60 free  unmarked
+0xc00013fa68 free  unmarked
+0xc00013fa70 free  unmarked
+0xc00013fa78 free  unmarked
+0xc00013fa80 free  unmarked
+0xc00013fa88 free  unmarked
+0xc00013fa90 free  unmarked
+0xc00013fa98 free  unmarked
+0xc00013faa0 free  unmarked
+0xc00013faa8 free  unmarked
+0xc00013fab0 free  unmarked
+0xc00013fab8 free  unmarked
+0xc00013fac0 free  unmarked
+0xc00013fac8 free  unmarked
+0xc00013fad0 free  unmarked
+0xc00013fad8 free  unmarked
+0xc00013fae0 free  unmarked
+0xc00013fae8 free  unmarked
+0xc00013faf0 free  unmarked
+0xc00013faf8 free  unmarked
+0xc00013fb00 free  unmarked
+0xc00013fb08 free  unmarked
+0xc00013fb10 free  unmarked
+0xc00013fb18 free  unmarked
+0xc00013fb20 free  unmarked
+0xc00013fb28 free  unmarked
+0xc00013fb30 free  unmarked
+0xc00013fb38 free  unmarked
+0xc00013fb40 free  unmarked
+0xc00013fb48 free  unmarked
+0xc00013fb50 free  unmarked
+0xc00013fb58 free  unmarked
+0xc00013fb60 free  unmarked
+0xc00013fb68 free  unmarked
+0xc00013fb70 free  unmarked
+0xc00013fb78 free  unmarked
+0xc00013fb80 free  unmarked
+0xc00013fb88 free  unmarked
+0xc00013fb90 free  unmarked
+0xc00013fb98 free  unmarked
+0xc00013fba0 free  unmarked
+0xc00013fba8 free  unmarked
+0xc00013fbb0 free  unmarked
+0xc00013fbb8 free  unmarked
+0xc00013fbc0 free  unmarked
+0xc00013fbc8 free  unmarked
+0xc00013fbd0 free  unmarked
+0xc00013fbd8 free  unmarked
+0xc00013fbe0 free  unmarked
+0xc00013fbe8 free  unmarked
+0xc00013fbf0 free  unmarked
+0xc00013fbf8 free  unmarked
+0xc00013fc00 free  unmarked
+0xc00013fc08 free  unmarked
+0xc00013fc10 free  unmarked
+0xc00013fc18 free  unmarked
+0xc00013fc20 free  unmarked
+0xc00013fc28 free  unmarked
+0xc00013fc30 free  unmarked
+0xc00013fc38 free  unmarked
+0xc00013fc40 free  unmarked
+0xc00013fc48 free  unmarked
+0xc00013fc50 free  unmarked
+0xc00013fc58 free  unmarked
+0xc00013fc60 free  unmarked
+0xc00013fc68 free  unmarked
+0xc00013fc70 free  unmarked
+0xc00013fc78 free  unmarked
+0xc00013fc80 free  unmarked
+0xc00013fc88 free  unmarked
+0xc00013fc90 free  unmarked
+0xc00013fc98 free  unmarked
+0xc00013fca0 free  unmarked
+0xc00013fca8 free  unmarked
+0xc00013fcb0 free  unmarked
+0xc00013fcb8 free  unmarked
+0xc00013fcc0 free  unmarked
+0xc00013fcc8 free  unmarked
+0xc00013fcd0 free  unmarked
+0xc00013fcd8 free  unmarked
+0xc00013fce0 free  unmarked
+0xc00013fce8 free  unmarked
+0xc00013fcf0 free  unmarked
+0xc00013fcf8 free  unmarked
+0xc00013fd00 free  unmarked
+0xc00013fd08 free  unmarked
+0xc00013fd10 free  unmarked
+0xc00013fd18 free  unmarked
+0xc00013fd20 free  unmarked
+0xc00013fd28 free  unmarked
+0xc00013fd30 free  unmarked
+0xc00013fd38 free  unmarked
+0xc00013fd40 free  unmarked
+0xc00013fd48 free  unmarked
+0xc00013fd50 free  unmarked
+0xc00013fd58 free  unmarked
+0xc00013fd60 free  unmarked
+0xc00013fd68 free  unmarked
+0xc00013fd70 free  unmarked
+0xc00013fd78 free  unmarked
+0xc00013fd80 free  unmarked
+0xc00013fd88 free  unmarked
+0xc00013fd90 free  unmarked
+0xc00013fd98 free  unmarked
+0xc00013fda0 free  unmarked
+0xc00013fda8 free  unmarked
+0xc00013fdb0 free  unmarked
+0xc00013fdb8 free  unmarked
+0xc00013fdc0 free  unmarked
+0xc00013fdc8 free  unmarked
+0xc00013fdd0 free  unmarked
+0xc00013fdd8 free  unmarked
+0xc00013fde0 free  unmarked
+0xc00013fde8 free  unmarked
+0xc00013fdf0 free  unmarked
+0xc00013fdf8 free  unmarked
+0xc00013fe00 free  unmarked
+0xc00013fe08 free  unmarked
+0xc00013fe10 free  unmarked
+0xc00013fe18 free  unmarked
+0xc00013fe20 free  unmarked
+0xc00013fe28 free  unmarked
+0xc00013fe30 free  unmarked
+0xc00013fe38 free  unmarked
+0xc00013fe40 free  unmarked
+0xc00013fe48 free  unmarked
+0xc00013fe50 free  unmarked
+0xc00013fe58 free  unmarked
+0xc00013fe60 free  unmarked
+0xc00013fe68 free  unmarked
+0xc00013fe70 free  unmarked
+0xc00013fe78 free  unmarked
+0xc00013fe80 free  unmarked
+0xc00013fe88 free  unmarked
+0xc00013fe90 free  unmarked
+0xc00013fe98 free  unmarked
+0xc00013fea0 free  unmarked
+0xc00013fea8 free  unmarked
+0xc00013feb0 free  unmarked
+0xc00013feb8 free  unmarked
+0xc00013fec0 free  unmarked
+0xc00013fec8 free  unmarked
+0xc00013fed0 free  unmarked
+0xc00013fed8 free  unmarked
+0xc00013fee0 free  unmarked
+0xc00013fee8 free  unmarked
+0xc00013fef0 free  unmarked
+0xc00013fef8 free  unmarked
+0xc00013ff00 free  unmarked
+0xc00013ff08 free  unmarked
+0xc00013ff10 free  unmarked
+0xc00013ff18 free  unmarked
+0xc00013ff20 free  unmarked
+0xc00013ff28 free  unmarked
+0xc00013ff30 free  unmarked
+0xc00013ff38 free  unmarked
+0xc00013ff40 free  unmarked
+0xc00013ff48 free  unmarked
+0xc00013ff50 free  unmarked
+0xc00013ff58 free  unmarked
+0xc00013ff60 free  unmarked
+0xc00013ff68 free  unmarked
+0xc00013ff70 free  unmarked
+0xc00013ff78 free  unmarked
+fatal error: found pointer to free object
+
+goroutine 8 gp=0xc0000cc000 m=4 mp=0xc000069808 [running]:
+runtime.throw({0x12470ac?, 0xc00013e1c8?})
+	/usr/local/go1.24.3_heaplock/src/runtime/panic.go:1101 +0x48 fp=0xc0000a7730 sp=0xc0000a7700 pc=0x4b4c48
+runtime.(*mspan).reportZombies(0x1166750f5368)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcsweep.go:877 +0x2ea fp=0xc0000a77b0 sp=0xc0000a7730 pc=0x4671ca
+runtime.(*sweepLocked).sweep(0x1992760?, 0x0)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcsweep.go:652 +0x5b3 fp=0xc0000a78f0 sp=0xc0000a77b0 pc=0x4662b3
+runtime.sweepone()
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcsweep.go:388 +0xdd fp=0xc0000a7940 sp=0xc0000a78f0 pc=0x465a3d
+runtime.deductSweepCredit(0x140000, 0xa0)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcsweep.go:935 +0x16e fp=0xc0000a7980 sp=0xc0000a7940 pc=0x46734e
+runtime.(*mcache).allocLarge(0xc0000d7a07?, 0x140000, 0x1)
+	/usr/local/go1.24.3_heaplock/src/runtime/mcache.go:232 +0x65 fp=0xc0000a79d0 sp=0xc0000a7980 pc=0x455985
+runtime.mallocgcLarge(0x0?, 0x11225a0, 0x1)
+	/usr/local/go1.24.3_heaplock/src/runtime/malloc.go:1540 +0x79 fp=0xc0000a7a30 sp=0xc0000a79d0 pc=0x452a59
+runtime.mallocgc(0x140000, 0x11225a0, 0x1)
+	/usr/local/go1.24.3_heaplock/src/runtime/malloc.go:1063 +0xc5 fp=0xc0000a7a80 sp=0xc0000a7a30 pc=0x4b2405
+runtime.makeslice(0x2fbf34816c08?, 0x14?, 0x4?)
+	/usr/local/go1.24.3_heaplock/src/runtime/slice.go:116 +0x49 fp=0xc0000a7aa8 sp=0xc0000a7a80 pc=0x4b7589
+github.com/glycerine/rpc25519.newWorkspace({0xc0001420d8, 0x14}, 0x13ffb0, 0x0, 0xc000152000, 0x0, 0xc00002e2e8)
+	/home/jaten/rpc25519/common.go:129 +0x7f fp=0xc0000a7b58 sp=0xc0000a7aa8 pc=0xe9abff
+github.com/glycerine/rpc25519.newBlabber({0x1238003, 0x10}, {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ...}, ...)
+	/home/jaten/rpc25519/chacha.go:223 +0x2a5 fp=0xc0000a7c80 sp=0xc0000a7b58 pc=0xe627c5
+github.com/glycerine/rpc25519.(*Client).runSendLoop(0xc000154008, {0x13d94c8, 0xc0002dd888}, 0xc00002e2e8)
+	/home/jaten/rpc25519/cli.go:522 +0x2b9 fp=0xc0000a7f90 sp=0xc0000a7c80 pc=0xe89819
+github.com/glycerine/rpc25519.(*Client).runClientMain.gowrap2()
+	/home/jaten/rpc25519/cli.go:247 +0x5e fp=0xc0000a7fe0 sp=0xc0000a7f90 pc=0xe875fe
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc0000a7fe8 sp=0xc0000a7fe0 pc=0x4bd121
+created by github.com/glycerine/rpc25519.(*Client).runClientMain in goroutine 34
+	/home/jaten/rpc25519/cli.go:247 +0x16cb
+
+goroutine 1 gp=0xc000002380 m=nil [chan receive]:
+runtime.gopark(0x18?, 0x1988a00?, 0x70?, 0xeb?, 0xc00021f598?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc0000f5530 sp=0xc0000f5510 pc=0x4b4d8e
+runtime.chanrecv(0xc000188770, 0xc00021f616, 0x1)
+	/usr/local/go1.24.3_heaplock/src/runtime/chan.go:664 +0x3e5 fp=0xc0000f55a8 sp=0xc0000f5530 pc=0x44aa45
+runtime.chanrecv1(0x1986800?, 0x1122520?)
+	/usr/local/go1.24.3_heaplock/src/runtime/chan.go:506 +0x12 fp=0xc0000f55d0 sp=0xc0000f55a8 pc=0x44a632
+testing.(*T).Run(0xc00018d340, {0x124b8b6, 0x20}, 0x1273f88)
+	/usr/local/go1.24.3_heaplock/src/testing/testing.go:1859 +0x91e fp=0xc0000f5708 sp=0xc0000f55d0 pc=0x60e39e
+testing.runTests.func1(0xc00018d340)
+	/usr/local/go1.24.3_heaplock/src/testing/testing.go:2279 +0x86 fp=0xc0000f5758 sp=0xc0000f5708 pc=0x6128a6
+testing.tRunner(0xc00018d340, 0xc00021f960)
+	/usr/local/go1.24.3_heaplock/src/testing/testing.go:1792 +0x226 fp=0xc0000f5828 sp=0xc0000f5758 pc=0x60c8e6
+testing.runTests(0xc00036eb10, {0x19815e0, 0x71, 0x71}, {0xffffffffffffffff?, 0x0?, 0x0?})
+	/usr/local/go1.24.3_heaplock/src/testing/testing.go:2277 +0x96d fp=0xc0000f5990 sp=0xc0000f5828 pc=0x61270d
+testing.(*M).Run(0xc0001d6820)
+	/usr/local/go1.24.3_heaplock/src/testing/testing.go:2142 +0xeeb fp=0xc0000f5d08 sp=0xc0000f5990 pc=0x60fceb
+github.com/glycerine/rpc25519.TestMain.func1(0xc0000f5e50, 0xc0001d6820)
+	/home/jaten/rpc25519/cli_test.go:71 +0x21e fp=0xc0000f5e40 sp=0xc0000f5d08 pc=0xf770de
+github.com/glycerine/rpc25519.TestMain(0xc0001d6820)
+	/home/jaten/rpc25519/cli_test.go:72 +0x35 fp=0xc0000f5e68 sp=0xc0000f5e40 pc=0xf76e95
+main.main()
+	_testmain.go:447 +0x172 fp=0xc0000f5f50 sp=0xc0000f5e68 pc=0x1015392
+runtime.main()
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:283 +0x28b fp=0xc0000f5fe0 sp=0xc0000f5f50 pc=0x47d6cb
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc0000f5fe8 sp=0xc0000f5fe0 pc=0x4bd121
+
+goroutine 2 gp=0xc000002e00 m=nil [force gc (idle)]:
+runtime.gopark(0x1918610?, 0x1988a00?, 0x0?, 0x0?, 0x0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc0000627a8 sp=0xc000062788 pc=0x4b4d8e
+runtime.goparkunlock(...)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:441
+runtime.forcegchelper()
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:348 +0xb3 fp=0xc0000627e0 sp=0xc0000627a8 pc=0x47da13
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc0000627e8 sp=0xc0000627e0 pc=0x4bd121
+created by runtime.init.7 in goroutine 1
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:336 +0x1a
+
+goroutine 3 gp=0xc000003340 m=nil [runnable]:
+runtime.gopark(0x1?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000184f80 sp=0xc000184f60 pc=0x4b4d8e
+runtime.goparkunlock(...)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:441
+runtime.bgsweep(0xc000028180)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcsweep.go:316 +0xdf fp=0xc000184fc8 sp=0xc000184f80 pc=0x4657ff
+runtime.gcenable.gowrap1()
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:204 +0x25 fp=0xc000184fe0 sp=0xc000184fc8 pc=0x459c85
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000184fe8 sp=0xc000184fe0 pc=0x4bd121
+created by runtime.gcenable in goroutine 1
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:204 +0x66
+
+goroutine 4 gp=0xc000003500 m=nil [GC scavenge wait]:
+runtime.gopark(0x10000?, 0x13c8b68?, 0x0?, 0x0?, 0x0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000072f78 sp=0xc000072f58 pc=0x4b4d8e
+runtime.goparkunlock(...)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:441
+runtime.(*scavengerState).park(0x1987240)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcscavenge.go:425 +0x49 fp=0xc000072fa8 sp=0xc000072f78 pc=0x463269
+runtime.bgscavenge(0xc000028180)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcscavenge.go:658 +0x59 fp=0xc000072fc8 sp=0xc000072fa8 pc=0x4637f9
+runtime.gcenable.gowrap2()
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:205 +0x25 fp=0xc000072fe0 sp=0xc000072fc8 pc=0x459c25
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000072fe8 sp=0xc000072fe0 pc=0x4bd121
+created by runtime.gcenable in goroutine 1
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:205 +0xa5
+
+goroutine 18 gp=0xc00018c380 m=nil [finalizer wait]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000078e30 sp=0xc000078e10 pc=0x4b4d8e
+runtime.runfinq()
+	/usr/local/go1.24.3_heaplock/src/runtime/mfinal.go:196 +0x145 fp=0xc000078fe0 sp=0xc000078e30 pc=0x458c45
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000078fe8 sp=0xc000078fe0 pc=0x4bd121
+created by runtime.createfing in goroutine 1
+	/usr/local/go1.24.3_heaplock/src/runtime/mfinal.go:166 +0x3d
+
+goroutine 19 gp=0xc00018c540 m=nil [chan receive]:
+runtime.gopark(0x19a9720?, 0xffffffff?, 0x89?, 0x4?, 0xc000073f50?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000073f18 sp=0xc000073ef8 pc=0x4b4d8e
+runtime.chanrecv(0xc0001880e0, 0x0, 0x1)
+	/usr/local/go1.24.3_heaplock/src/runtime/chan.go:664 +0x3e5 fp=0xc000073f90 sp=0xc000073f18 pc=0x44aa45
+runtime.chanrecv1(0x0?, 0x0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/chan.go:506 +0x12 fp=0xc000073fb8 sp=0xc000073f90 pc=0x44a632
+runtime.unique_runtime_registerUniqueMapCleanup.func2(...)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1796
+runtime.unique_runtime_registerUniqueMapCleanup.gowrap1()
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1799 +0x2f fp=0xc000073fe0 sp=0xc000073fb8 pc=0x45cdcf
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000073fe8 sp=0xc000073fe0 pc=0x4bd121
+created by unique.runtime_registerUniqueMapCleanup in goroutine 1
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1794 +0x79
+
+goroutine 20 gp=0xc00018c700 m=nil [select, locked to thread]:
+runtime.gopark(0xc000074fa8?, 0x2?, 0x60?, 0x0?, 0xc000074f94?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000074de8 sp=0xc000074dc8 pc=0x4b4d8e
+runtime.selectgo(0xc000074fa8, 0xc000074f90, 0x0?, 0x0, 0x2?, 0x1)
+	/usr/local/go1.24.3_heaplock/src/runtime/select.go:351 +0x985 fp=0xc000074f58 sp=0xc000074de8 pc=0x491285
+runtime.ensureSigM.func1()
+	/usr/local/go1.24.3_heaplock/src/runtime/signal_unix.go:1085 +0x192 fp=0xc000074fe0 sp=0xc000074f58 pc=0x4aee72
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000074fe8 sp=0xc000074fe0 pc=0x4bd121
+created by runtime.ensureSigM in goroutine 1
+	/usr/local/go1.24.3_heaplock/src/runtime/signal_unix.go:1068 +0xc8
+
+goroutine 21 gp=0xc00018c8c0 m=7 mp=0xc000100808 [syscall]:
+runtime.notetsleepg(0x19a9fa0, 0xffffffffffffffff)
+	/usr/local/go1.24.3_heaplock/src/runtime/lock_futex.go:123 +0x29 fp=0xc00005f7a0 sp=0xc00005f778 pc=0x4506e9
+os/signal.signal_recv()
+	/usr/local/go1.24.3_heaplock/src/runtime/sigqueue.go:152 +0x29 fp=0xc00005f7c0 sp=0xc00005f7a0 pc=0x4b72c9
+os/signal.loop()
+	/usr/local/go1.24.3_heaplock/src/os/signal/signal_unix.go:23 +0x1d fp=0xc00005f7e0 sp=0xc00005f7c0 pc=0x6c4e3d
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00005f7e8 sp=0xc00005f7e0 pc=0x4bd121
+created by os/signal.Notify.func1.1 in goroutine 1
+	/usr/local/go1.24.3_heaplock/src/os/signal/signal.go:152 +0x47
+
+goroutine 22 gp=0xc00018ca80 m=nil [chan receive]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000079e18 sp=0xc000079df8 pc=0x4b4d8e
+runtime.chanrecv(0xc000303b90, 0xc000079f98, 0x1)
+	/usr/local/go1.24.3_heaplock/src/runtime/chan.go:664 +0x3e5 fp=0xc000079e90 sp=0xc000079e18 pc=0x44aa45
+runtime.chanrecv2(0x0?, 0x0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/chan.go:511 +0x12 fp=0xc000079eb8 sp=0xc000079e90 pc=0x44a652
+github.com/glycerine/rpc25519.init.1.func1()
+	/home/jaten/rpc25519/filterstacks.go:22 +0x28c fp=0xc000079fe0 sp=0xc000079eb8 pc=0xfee2ec
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000079fe8 sp=0xc000079fe0 pc=0x4bd121
+created by github.com/glycerine/rpc25519.init.1 in goroutine 1
+	/home/jaten/rpc25519/filterstacks.go:21 +0xca
+
+goroutine 23 gp=0xc00018d6c0 m=nil [runnable]:
+runtime.gopark(0xc000049412?, 0xc0002d7300?, 0xc8?, 0x57?, 0x7a855da0ada0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000049318 sp=0xc0000492f8 pc=0x4b4d8e
+runtime.goparkunlock(...)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:441
+runtime.gcParkAssist()
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcmark.go:754 +0xe7 fp=0xc000049350 sp=0xc000049318 pc=0x45f327
+runtime.gcAssistAlloc(0xc00018d6c0)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcmark.go:594 +0x345 fp=0xc0000493e0 sp=0xc000049350 pc=0x45eb45
+runtime.deductAssistCredit(0x70a87c81e108?)
+	/usr/local/go1.24.3_heaplock/src/runtime/malloc.go:1679 +0x46 fp=0xc000049400 sp=0xc0000493e0 pc=0x452ee6
+runtime.mallocgc(0x50, 0x11f2760, 0x1)
+	/usr/local/go1.24.3_heaplock/src/runtime/malloc.go:1044 +0x67 fp=0xc000049450 sp=0xc000049400 pc=0x4b23a7
+runtime.newobject(0x4495c7?)
+	/usr/local/go1.24.3_heaplock/src/runtime/malloc.go:1714 +0x25 fp=0xc000049478 sp=0xc000049450 pc=0x452fc5
+context.withCancel(...)
+	/usr/local/go1.24.3_heaplock/src/context/context.go:277
+context.WithCancel({0x13d6870, 0x19a92c0})
+	/usr/local/go1.24.3_heaplock/src/context/context.go:241 +0x45 fp=0xc0000494c0 sp=0xc000049478 pc=0x59c885
+github.com/glycerine/rpc25519.Test040_remote_cancel_by_context.func1()
+	/home/jaten/rpc25519/cli_test.go:972 +0x6f0 fp=0xc000049868 sp=0xc0000494c0 pc=0xf7dad0
+github.com/glycerine/goconvey/convey.discover.parseAction.func1({0xc00036eb88?, 0xc00036d770?})
+	/home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/discovery.go:80 +0x2f fp=0xc000049888 sp=0xc000049868 pc=0xe5f06f
+github.com/glycerine/goconvey/convey.(*context).conveyInner(0xc0002d7200, {0x123aeca, 0x13}, 0xc0001d5a00)
+	/home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/context.go:264 +0x2d1 fp=0xc0000499d0 sp=0xc000049888 pc=0xe5e0b1
+github.com/glycerine/goconvey/convey.rootConvey.func1()
+	/home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/context.go:113 +0x1a5 fp=0xc000049a88 sp=0xc0000499d0 pc=0xe5c405
+github.com/jtolds/gls.(*ContextManager).SetValues.func1(0x0)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/context.go:97 +0x66a fp=0xc000049c58 sp=0xc000049a88 pc=0xe58aca
+github.com/jtolds/gls.EnsureGoroutineId.func1()
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/gid.go:24 +0x39 fp=0xc000049c80 sp=0xc000049c58 pc=0xe590f9
+github.com/jtolds/gls._m(0x0, 0xc00036ebb8)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/stack_tags.go:108 +0x39 fp=0xc000049ca8 sp=0xc000049c80 pc=0xe5b979
+github.com/jtolds/gls.github_com_jtolds_gls_markS(0x0, 0xc00036ebb8)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/stack_tags.go:56 +0x34 fp=0xc000049cc8 sp=0xc000049ca8 pc=0xe5b314
+github.com/jtolds/gls.addStackTag(...)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/stack_tags.go:49
+github.com/jtolds/gls.EnsureGoroutineId(0xc00036d6e0)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/gid.go:24 +0x165 fp=0xc000049d48 sp=0xc000049cc8 pc=0xe59065
+github.com/jtolds/gls.(*ContextManager).SetValues(0xc0001d4820, 0xc00036d680, 0xc0001d1ac0)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/context.go:63 +0x285 fp=0xc000049d98 sp=0xc000049d48 pc=0xe58405
+github.com/glycerine/goconvey/convey.rootConvey({0xc000077ea0, 0x3, 0x3})
+	/home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/context.go:108 +0x465 fp=0xc000049e50 sp=0xc000049d98 pc=0xe5c185
+github.com/glycerine/goconvey/convey.Convey({0xc000077ea0, 0x3, 0x3})
+	/home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/doc.go:73 +0x9b fp=0xc000049e80 sp=0xc000049e50 pc=0xe5f13b
+github.com/glycerine/rpc25519.Test040_remote_cancel_by_context(0xc00018d500)
+	/home/jaten/rpc25519/cli_test.go:935 +0x10f fp=0xc000049ee0 sp=0xc000049e80 pc=0xf7d3af
+testing.tRunner(0xc00018d500, 0x1273f88)
+	/usr/local/go1.24.3_heaplock/src/testing/testing.go:1792 +0x226 fp=0xc000049fb0 sp=0xc000049ee0 pc=0x60c8e6
+testing.(*T).Run.gowrap1()
+	/usr/local/go1.24.3_heaplock/src/testing/testing.go:1851 +0x45 fp=0xc000049fe0 sp=0xc000049fb0 pc=0x60e645
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000049fe8 sp=0xc000049fe0 pc=0x4bd121
+created by testing.(*T).Run in goroutine 1
+	/usr/local/go1.24.3_heaplock/src/testing/testing.go:1851 +0x8f3
+
+goroutine 24 gp=0xc00018da40 m=nil [IO wait]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0xc000348880?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc0004737d0 sp=0xc0004737b0 pc=0x4b4d8e
+runtime.netpollblock(0x4c0451?, 0x527dc5?, 0x0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/netpoll.go:575 +0xf7 fp=0xc000473808 sp=0xc0004737d0 pc=0x476057
+internal/poll.runtime_pollWait(0x2fbf34836710, 0x72)
+	/usr/local/go1.24.3_heaplock/src/runtime/netpoll.go:351 +0x85 fp=0xc000473828 sp=0xc000473808 pc=0x4b3f85
+internal/poll.(*pollDesc).wait(0xc0003488a0, 0x72, 0x0)
+	/usr/local/go1.24.3_heaplock/src/internal/poll/fd_poll_runtime.go:84 +0xb1 fp=0xc000473868 sp=0xc000473828 pc=0x51fe31
+internal/poll.(*pollDesc).waitRead(...)
+	/usr/local/go1.24.3_heaplock/src/internal/poll/fd_poll_runtime.go:89
+internal/poll.(*FD).Accept(0xc000348880)
+	/usr/local/go1.24.3_heaplock/src/internal/poll/fd_unix.go:620 +0x505 fp=0xc000473970 sp=0xc000473868 pc=0x527dc5
+net.(*netFD).accept(0xc000348880)
+	/usr/local/go1.24.3_heaplock/src/net/fd_unix.go:172 +0x45 fp=0xc000473a80 sp=0xc000473970 pc=0x83c785
+net.(*TCPListener).accept(0xc0002d5500)
+	/usr/local/go1.24.3_heaplock/src/net/tcpsock_posix.go:159 +0x4e fp=0xc000473b20 sp=0xc000473a80 pc=0x861f8e
+net.(*TCPListener).Accept(0xc0002d5500)
+	/usr/local/go1.24.3_heaplock/src/net/tcpsock.go:380 +0x65 fp=0xc000473b90 sp=0xc000473b20 pc=0x860345
+crypto/tls.(*listener).Accept(0xc00036ef60)
+	/usr/local/go1.24.3_heaplock/src/crypto/tls/tls.go:67 +0x43 fp=0xc000473be8 sp=0xc000473b90 pc=0x9762c3
+github.com/glycerine/rpc25519.(*Server).runServerMain(0xc00018d880, {0x123495a, 0xb}, 0x0, {0x0, 0x0}, 0xc0003720e0)
+	/home/jaten/rpc25519/srv.go:218 +0x12e3 fp=0xc000473f60 sp=0xc000473be8 pc=0xf38e23
+github.com/glycerine/rpc25519.(*Server).Start.gowrap1()
+	/home/jaten/rpc25519/srv.go:2281 +0x8f fp=0xc000473fe0 sp=0xc000473f60 pc=0xf4aeef
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000473fe8 sp=0xc000473fe0 pc=0x4bd121
+created by github.com/glycerine/rpc25519.(*Server).Start in goroutine 23
+	/home/jaten/rpc25519/srv.go:2281 +0xa7e
+
+goroutine 34 gp=0xc000102a80 m=nil [runnable]:
+runtime.Gosched(...)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:364
+runtime.gcAssistAlloc(0xc000102a80)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcmark.go:581 +0x325 fp=0xc0000fcff8 sp=0xc0000fcf68 pc=0x45eb25
+runtime.deductAssistCredit(0xc0000fd078?)
+	/usr/local/go1.24.3_heaplock/src/runtime/malloc.go:1679 +0x46 fp=0xc0000fd018 sp=0xc0000fcff8 pc=0x452ee6
+runtime.mallocgc(0x20000, 0x11225a0, 0x1)
+	/usr/local/go1.24.3_heaplock/src/runtime/malloc.go:1044 +0x67 fp=0xc0000fd068 sp=0xc0000fd018 pc=0x4b23a7
+runtime.makeslice(0x0?, 0x0?, 0xc000168380?)
+	/usr/local/go1.24.3_heaplock/src/runtime/slice.go:116 +0x49 fp=0xc0000fd090 sp=0xc0000fd068 pc=0x4b7589
+github.com/klauspost/compress/zstd.(*blockEnc).init(0xc000168380)
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/blockenc.go:52 +0x20a fp=0xc0000fd100 sp=0xc0000fd090 pc=0xca37aa
+github.com/klauspost/compress/zstd.(*fastBase).resetBase(0xc000942000, 0x0, 0x0)
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/enc_base.go:137 +0x317 fp=0xc0000fd250 sp=0xc0000fd100 pc=0xcb7b97
+github.com/klauspost/compress/zstd.(*bestFastEncoder).Reset(0xc000942000, 0x0, 0x0)
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/enc_best.go:489 +0x65 fp=0xc0000fd368 sp=0xc0000fd250 pc=0xcbcb05
+github.com/klauspost/compress/zstd.(*Encoder).Reset(0xc000166780, {0x13cff00, 0x19a92c0})
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/encoder.go:122 +0x6ec fp=0xc0000fd488 sp=0xc0000fd368 pc=0xcdc86c
+github.com/klauspost/compress/zstd.NewWriter({0x13cff00, 0x19a92c0}, {0xc0004a95d8, 0x1, 0xc000580000?})
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/encoder.go:78 +0x1ea fp=0xc0000fd510 sp=0xc0000fd488 pc=0xcdbeaa
+github.com/glycerine/rpc25519.newPressor(0x140000)
+	/home/jaten/rpc25519/compress.go:134 +0x36f fp=0xc0000fd630 sp=0xc0000fd510 pc=0xe9d6ef
+github.com/glycerine/rpc25519.newWorkspace({0xc00002e300, 0x14}, 0x13ffb0, 0x0, 0xc000152000, 0x0, 0xc00002e2e8)
+	/home/jaten/rpc25519/common.go:148 +0x445 fp=0xc0000fd6e0 sp=0xc0000fd630 pc=0xe9afc5
+github.com/glycerine/rpc25519.newBlabber({0x1237ff3, 0x10}, {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ...}, ...)
+	/home/jaten/rpc25519/chacha.go:223 +0x2a5 fp=0xc0000fd808 sp=0xc0000fd6e0 pc=0xe627c5
+github.com/glycerine/rpc25519.(*Client).runReadLoop(0xc000154008, {0x13d94c8, 0xc0002dd888}, 0xc00002e2e8)
+	/home/jaten/rpc25519/cli.go:342 +0x316 fp=0xc0000fda08 sp=0xc0000fd808 pc=0xe88a76
+github.com/glycerine/rpc25519.(*Client).runClientMain(0xc000154008, {0xc000122251, 0xf}, 0x0, {0x0, 0x0})
+	/home/jaten/rpc25519/cli.go:248 +0x16ef fp=0xc0000fdf70 sp=0xc0000fda08 pc=0xe871ef
+github.com/glycerine/rpc25519.(*Client).Start.gowrap1()
+	/home/jaten/rpc25519/cli.go:1665 +0x79 fp=0xc0000fdfe0 sp=0xc0000fdf70 pc=0xe90039
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc0000fdfe8 sp=0xc0000fdfe0 pc=0x4bd121
+created by github.com/glycerine/rpc25519.(*Client).Start in goroutine 23
+	/home/jaten/rpc25519/cli.go:1665 +0x3f6
+
+goroutine 25 gp=0xc000102e00 m=nil [runnable]:
+runtime.gopark(0x0?, 0x29c0?, 0x60?, 0x12?, 0x7a855da0ada0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000185a68 sp=0xc000185a48 pc=0x4b4d8e
+runtime.goparkunlock(...)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:441
+runtime.gcParkAssist()
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcmark.go:754 +0xe7 fp=0xc000185aa0 sp=0xc000185a68 pc=0x45f327
+runtime.gcAssistAlloc(0xc000102e00)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgcmark.go:594 +0x345 fp=0xc000185b30 sp=0xc000185aa0 pc=0x45eb45
+runtime.deductAssistCredit(0xaa000b?)
+	/usr/local/go1.24.3_heaplock/src/runtime/malloc.go:1679 +0x46 fp=0xc000185b50 sp=0xc000185b30 pc=0x452ee6
+runtime.mallocgc(0x20, 0x112f1a0, 0x1)
+	/usr/local/go1.24.3_heaplock/src/runtime/malloc.go:1044 +0x67 fp=0xc000185ba0 sp=0xc000185b50 pc=0x4b23a7
+runtime.newobject(0x4c0451?)
+	/usr/local/go1.24.3_heaplock/src/runtime/malloc.go:1714 +0x25 fp=0xc000185bc8 sp=0xc000185ba0 pc=0x452fc5
+github.com/glycerine/rpc25519.newBlabber({0x1238183, 0x10}, {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ...}, ...)
+	/home/jaten/rpc25519/chacha.go:150 +0x7e fp=0xc000185cf0 sp=0xc000185bc8 pc=0xe6259e
+github.com/glycerine/rpc25519.(*rwPair).runSendLoop(0xc0004b2008, {0x13d94c8, 0xc000178008})
+	/home/jaten/rpc25519/srv.go:443 +0x31e fp=0xc000185fa0 sp=0xc000185cf0 pc=0xf3acbe
+github.com/glycerine/rpc25519.(*Server).serveConn.gowrap1()
+	/home/jaten/rpc25519/srv.go:361 +0x50 fp=0xc000185fe0 sp=0xc000185fa0 pc=0xf3a690
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000185fe8 sp=0xc000185fe0 pc=0x4bd121
+created by github.com/glycerine/rpc25519.(*Server).serveConn in goroutine 35
+	/home/jaten/rpc25519/srv.go:361 +0x3b7
+
+goroutine 5 gp=0xc000003a40 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000183f38 sp=0xc000183f18 pc=0x4b4d8e
+runtime.gcBgMarkWorker(0xc00003e070)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1423 +0xe9 fp=0xc000183fc8 sp=0xc000183f38 pc=0x45c0e9
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1339 +0x25 fp=0xc000183fe0 sp=0xc000183fc8 pc=0x45bfc5
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000183fe8 sp=0xc000183fe0 pc=0x4bd121
+created by runtime.gcBgMarkStartWorkers in goroutine 34
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1339 +0x105
+
+goroutine 6 gp=0xc000003c00 m=nil [GC worker (idle)]:
+runtime.gopark(0xbd36f61a77a?, 0xc000062f70?, 0x77?, 0x96?, 0xc000028180?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000182f38 sp=0xc000182f18 pc=0x4b4d8e
+runtime.gcBgMarkWorker(0xc00003e070)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1423 +0xe9 fp=0xc000182fc8 sp=0xc000182f38 pc=0x45c0e9
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1339 +0x25 fp=0xc000182fe0 sp=0xc000182fc8 pc=0x45bfc5
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000182fe8 sp=0xc000182fe0 pc=0x4bd121
+created by runtime.gcBgMarkStartWorkers in goroutine 34
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1339 +0x105
+
+goroutine 7 gp=0xc000003dc0 m=nil [runnable]:
+runtime.gopark(0xc000181e88?, 0xc000069808?, 0xa0?, 0xf7?, 0xc000003dc0?)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:435 +0xce fp=0xc000181e30 sp=0xc000181e10 pc=0x4b4d8e
+runtime.goparkunlock(...)
+	/usr/local/go1.24.3_heaplock/src/runtime/proc.go:441
+runtime.semacquire1(0x198821c, 0x0, 0x0, 0x0, 0x12)
+	/usr/local/go1.24.3_heaplock/src/runtime/sema.go:188 +0x21d fp=0xc000181e98 sp=0xc000181e30 pc=0x4925fd
+runtime.semacquire(...)
+	/usr/local/go1.24.3_heaplock/src/runtime/sema.go:139
+runtime.gcMarkDone()
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:872 +0x32 fp=0xc000181f38 sp=0xc000181e98 pc=0x45a8b2
+runtime.gcBgMarkWorker(0xc00003e070)
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1559 +0x331 fp=0xc000181fc8 sp=0xc000181f38 pc=0x45c331
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1339 +0x25 fp=0xc000181fe0 sp=0xc000181fc8 pc=0x45bfc5
+runtime.goexit({})
+	/usr/local/go1.24.3_heaplock/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000181fe8 sp=0xc000181fe0 pc=0x4bd121
+created by runtime.gcBgMarkStartWorkers in goroutine 34
+	/usr/local/go1.24.3_heaplock/src/runtime/mgc.go:1339 +0x105
+
+goroutine 26 gp=0xc00018dc00 m=9 mp=0xc000101808 [running]:
+	goroutine running on other thread; stack unavailable
+created by github.com/glycerine/rpc25519.(*Server).serveConn in goroutine 35
+	/home/jaten/rpc25519/srv.go:362 +0x485

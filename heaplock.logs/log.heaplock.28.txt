@@ -1,0 +1,58 @@
+faketime = false
+=== RUN   Test040_remote_cancel_by_context
+
+cli_test.go:948 [goID 20] 2025-06-09 01:39:45.907219629 +0000 UTC server Start() returned serverAddr = '127.0.0.1:46333'
+
+cli.go:211 [goID 34] 2025-06-09 01:39:45.928648228 +0000 UTC connected to server 127.0.0.1:46333
+
+cli_test.go:982 [goID 20] 2025-06-09 01:39:46.254086885 +0000 UTC cli_test 040: about to block on test040callStarted
+
+cli_test.go:974 [goID 22] 2025-06-09 01:39:46.258647677 +0000 UTC client.Call() goro top about to call over net/rpc: MustBeCancelled.WillHangUntilCancel()
+example.go:300 server-side: WillHangUntilCancel() is running
+example.go:304 net.rpc API: our net.Conn has 
+local = '127.0.0.1:46333'
+remote = '127.0.0.1:40124'
+
+cli_test.go:984 [goID 20] 2025-06-09 01:39:47.063813361 +0000 UTC cli_test 040: we got past test040callStarted
+
+cli_test.go:988 [goID 20] 2025-06-09 01:39:47.064022308 +0000 UTC past cancelFunc()
+
+cli_test.go:977 [goID 22] 2025-06-09 01:39:47.064317028 +0000 UTC client.Call() returned with cliErr = 'cancellation request sent'
+
+cli_test.go:991 [goID 20] 2025-06-09 01:39:47.064528750 +0000 UTC past cliErrIsSet channel; cliErr40 = 'cancellation request sent'
+
+cli_test.go:998 [goID 20] 2025-06-09 01:39:47.064809053 +0000 UTC about to verify that server side context was cancelled.
+example.go:310 MustBeCancelled.WillHangUntilCancel(): ctx.Done() was closed!
+
+cli_test.go:1000 [goID 20] 2025-06-09 01:39:47.065373545 +0000 UTC server side saw the cancellation request: confirmed.
+example.go:324 server-side: MessageAPI_HangUntilCancel() is running
+example.go:326: Message API: our net.Conn has local = '127.0.0.1:46333'; remote = '127.0.0.1:40124'
+
+cli_test.go:1020 [goID 20] 2025-06-09 01:39:47.066270067 +0000 UTC cli_test 041: we got past test041callStarted
+
+cli_test.go:1024 [goID 20] 2025-06-09 01:39:47.066461782 +0000 UTC past cancelFunc()
+example.go: MustBeCancelled.MessageAPI_HangUntilCancel(): ctx.Done() was closed!
+
+cli_test.go:1014 [goID 52] 2025-06-09 01:39:47.068719760 +0000 UTC client.Call() returned with cliErr = 'cancellation request sent'
+
+cli_test.go:1027 [goID 20] 2025-06-09 01:39:47.068926022 +0000 UTC past cliErrIsSet channel; cliErr = 'cancellation request sent'
+
+cli_test.go:1038 [goID 20] 2025-06-09 01:39:47.069120942 +0000 UTC about to verify that server side context was cancelled.
+
+0 assertions thus far
+
+--- PASS: Test040_remote_cancel_by_context (1.17s)
+=== RUN   Test045_upload
+
+cli.go:1473 [goID 34] 2025-06-09 01:39:47.077658147 +0000 UTC rpc: client protocol error: 'shutting down'
+
+srv.go:585 [goID 15] 2025-06-09 01:39:47.077989486 +0000 UTC server sees io.EOF from receiveMessage
+
+cli.go:211 [goID 23] 2025-06-09 01:39:47.087697585 +0000 UTC connected to server 127.0.0.1:36281
+
+cli.go:2718 [goID 54] 2025-06-09 01:39:48.124220277 +0000 UTC no simnet, Client made time.NewTimer(dur=1m0s)
+...
+3 assertions thus far
+
+--- PASS: Test045_upload (1.15s)
+PASS

@@ -1,0 +1,10 @@
+faketime = false
+=== RUN   Test040_remote_cancel_by_context
+
+cli_test.go:948 [goID 8] 2025-06-09 01:38:24.571235175 +0000 UTC server Start() returned serverAddr = '127.0.0.1:40313'
+
+cli.go:211 [goID 20] 2025-06-09 01:38:24.587095428 +0000 UTC connected to server 127.0.0.1:40313
+
+cli_test.go:982 [goID 8] 2025-06-09 01:38:24.587369548 +0000 UTC cli_test 040: about to block on test040callStarted
+
+cli_test.go:974 [goID 12] 2025-06-09 01:38:24.587659819 +0000 UTC client.Call() goro top about to call over net/rpc: MustBeCancelled.WillHangUntilCancel()

@@ -1,0 +1,28 @@
+faketime = false
+=== RUN   Test040_remote_cancel_by_context
+
+cli_test.go:948 [goID 36] 2025-06-09 01:40:24.834865184 +0000 UTC server Start() returned serverAddr = '127.0.0.1:38349'
+
+cli.go:211 [goID 38] 2025-06-09 01:40:24.856005607 +0000 UTC connected to server 127.0.0.1:38349
+
+cli_test.go:982 [goID 36] 2025-06-09 01:40:25.106745675 +0000 UTC cli_test 040: about to block on test040callStarted
+
+cli_test.go:974 [goID 50] 2025-06-09 01:40:25.107035255 +0000 UTC client.Call() goro top about to call over net/rpc: MustBeCancelled.WillHangUntilCancel()
+example.go:300 server-side: WillHangUntilCancel() is running
+example.go:304 net.rpc API: our net.Conn has 
+local = '127.0.0.1:38349'
+remote = '127.0.0.1:47230'
+
+cli_test.go:984 [goID 36] 2025-06-09 01:40:25.952830258 +0000 UTC cli_test 040: we got past test040callStarted
+
+cli_test.go:988 [goID 36] 2025-06-09 01:40:25.953031630 +0000 UTC past cancelFunc()
+
+cli_test.go:977 [goID 50] 2025-06-09 01:40:25.953977737 +0000 UTC client.Call() returned with cliErr = 'cancellation request sent'
+
+cli_test.go:991 [goID 36] 2025-06-09 01:40:25.954177065 +0000 UTC past cliErrIsSet channel; cliErr40 = 'cancellation request sent'
+
+cli_test.go:998 [goID 36] 2025-06-09 01:40:25.954449984 +0000 UTC about to verify that server side context was cancelled.
+example.go:310 MustBeCancelled.WillHangUntilCancel(): ctx.Done() was closed!
+
+cli_test.go:1000 [goID 36] 2025-06-09 01:40:25.956038240 +0000 UTC server side saw the cancellation request: confirmed.
+ThreadSanitizer: CHECK failed: sanitizer_allocator_secondary.h:297 "((IsAligned(p, page_size_))) != (0)" (0x0, 0x0) (tid=297314)

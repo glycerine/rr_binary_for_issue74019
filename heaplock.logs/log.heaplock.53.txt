@@ -1,0 +1,8 @@
+faketime = false
+=== RUN   Test040_remote_cancel_by_context
+
+cli_test.go:948 [goID 10] 2025-06-09 01:41:21.701250773 +0000 UTC server Start() returned serverAddr = '127.0.0.1:35839'
+
+cli.go:211 [goID 12] 2025-06-09 01:41:21.713569030 +0000 UTC connected to server 127.0.0.1:35839
+
+cli_test.go:982 [goID 10] 2025-06-09 01:41:21.713971594 +0000 UTC cli_test 040: about to block on test040callStarted
