@@ -76,13 +76,18 @@ hardware watchpoints to debug.
 
 https://github.com/glycerine/rr_binary_for_issue74019/raw/refs/heads/master/issue74019_gemini_root_cause_rr_debug_session.mhtml
 
-You'll probably have to download it and then open
+(Ignore my first two questions to gemini, the fun really
+starts at the third prompt).
+
+To view, you'll probably have to download it and then open
 the mhtml file with a browser, as the .mhtml file
 is the saved output of the gemini session 
 by Chrome's File->Save Page As -> Webpage, single file.
-I don't know how to share gemini sessions otherwise.
 
-back to the story
+(I don't know how to share gemini sessions otherwise;
+if there are tricks, let me know).
+
+Now back to the story...
 
 # initial segfault stack traces
 
