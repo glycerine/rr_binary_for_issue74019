@@ -1550,6 +1550,17 @@ used to fully debug each in turn.
 I tried applying the lock that gemini suggested on top of go1.24.3
 to lock around the h.setSpans() at mheap.go:1514.
 
+~~~
+jaten@rog /usr/local/go1.24.3_heaplock/src/runtime $ diff mheap.go /usr/local/go1.24.3/src/runtime/mheap.go
+
+1449,1450d1448
+<       lock(&h.lock)
+<
+1470,1471d1467
+<
+<       unlock(&h.lock)
+~~~
+
 This appears to have supressed the original rpc.test-24 trace issue.
 However 14/100 runs show other issues still. Those [traces](https://github.com/glycerine/rr_binary_for_issue74019/tree/master/traces/heaplocked)
 and [logs](https://github.com/glycerine/rr_binary_for_issue74019/tree/master/heaplock.logs) are available in this repo too. 
