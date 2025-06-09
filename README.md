@@ -52,7 +52,9 @@ I've made a bunch a progress on the rpc.test-24 trace,
 and gotten pretty close to a conclusion, at least a
 tentative one. 
 
-The recording was of this test, under the race detector:
+The recording was of this test, under the race detector.
+
+The binary can be found here: https://github.com/glycerine/rr_binary_for_issue74019/blob/master/traces/rpc045/rpc.test
 
 ~~~
 $ cd rpc25519 # at tag v1.22.62 https://github.com/glycerine/rpc25519
