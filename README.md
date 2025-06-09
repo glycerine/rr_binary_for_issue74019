@@ -93,7 +93,9 @@ by Chrome's File->Save Page As -> Webpage, single file.
 if there are tricks, let me know. update: Ah, I see. 
 I had Gemini Apps Activity/Sessions off due to privacy concerns when
 it was discussed last year. Apparently that setting
-must be on in order to share a chat).
+must be on in order to share a chat. I tried turning
+the setting on in order to share session, but
+Gemini helpfully just deleted it fully instead).
 
 Now back to the story...
 
