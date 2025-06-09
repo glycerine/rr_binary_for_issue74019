@@ -1565,7 +1565,7 @@ to lock around the h.setSpans() at mheap.go:1514.
 ~/rpc25519 (master) $ go-heaplock test -race -c -o rpc.test.heaplock
 ~~~
 
-This appears to have supressed the original rpc.test-24 trace issue.
+This appears to have addressed (fixed? supressed?) the original rpc.test-24 trace issue.
 However 14/100 runs show other issues still. Those [traces](https://github.com/glycerine/rr_binary_for_issue74019/tree/master/traces/heaplocked)
 and [logs](https://github.com/glycerine/rr_binary_for_issue74019/tree/master/heaplock.logs) are available in this repo too. 
 
