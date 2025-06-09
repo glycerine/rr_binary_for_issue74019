@@ -48,8 +48,11 @@ in the runtime that rr -h chaos mode will flush out.
 Fortunately, each one gets recorded in its own trace.
 Thus each can be tackled in turn.
 
-I've made a bunch a progress, and run the following 
-single trace to its (tentative) conclusion.
+I've made a bunch a progress on the rpc.test-24 trace,
+and gotten pretty close to a conclusion, at least a
+tentative one. 
+
+The recording was of this test, under the race detector:
 
 ~~~
 $ cd rpc25519 # at tag v1.22.62 https://github.com/glycerine/rpc25519
