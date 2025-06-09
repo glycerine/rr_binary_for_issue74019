@@ -1536,9 +1536,14 @@ rdi            0x2d6d11601500      49946466194688
 (rr) 
 ~~~
 
-# was that the only bug
+# Does chaos mode find other bugs?
 
-No. There are alot of other issues that rr finds. Fortunately
+Yep. 
+
+Was the above rpc.test-24 the only bug present? Nope.
+
+There are alot of other issues that rr + chaos mode finds
+with the race detector on. Fortunately
 each issue is accompanied by a trace recording that can be
 used to fully debug each in turn.
 
@@ -1547,4 +1552,19 @@ to lock around the h.setSpans() at mheap.go:1514.
 
 This appears to have supressed the original rpc.test-24 trace issue.
 However 14/100 runs show other issues still. Those [traces](https://github.com/glycerine/rr_binary_for_issue74019/tree/master/traces/heaplocked)
-and [logs](https://github.com/glycerine/rr_binary_for_issue74019/tree/master/heaplock.logs) are available in this repo too.
+and [logs](https://github.com/glycerine/rr_binary_for_issue74019/tree/master/heaplock.logs) are available in this repo too. 
+
+This was the script that produced them:
+
+~~~
+jaten@rog ~/rpc25519 (master) $ cat do.chaos
+#!/bin/bash
+
+for i in `seq 0 100`; do
+
+rr record -h ./rpc.test.heaplock -test.v -test.run Test04[05] &> /home/jaten/issue74019/heaplock.logs/log.heaplock.$i.txt
+
+rr pack
+
+done
+~~~
