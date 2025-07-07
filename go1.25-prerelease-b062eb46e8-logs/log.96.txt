@@ -1,0 +1,39 @@
+fatal error: too many address space collisions for -race mode
+
+runtime stack:
+runtime.throw({0x124ef5c?, 0x4000000?})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/panic.go:1094 +0x48 fp=0x7ffc62705d88 sp=0x7ffc62705d58 pc=0x4bc9c8
+runtime.(*mheap).sysAlloc(0x198e8c0, 0x0?, 0x199eac8, 0x199eaf0)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/malloc.go:713 +0x667 fp=0x7ffc62705e30 sp=0x7ffc62705d88 pc=0x4558c7
+runtime.(*mheap).grow(0x198e8c0, 0x56bd775ff280?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mheap.go:1566 +0x85 fp=0x7ffc62705eb0 sp=0x7ffc62705e30 pc=0x46fd85
+runtime.(*mheap).allocSpan(0x198e8c0, 0x1, 0x0, 0x20)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mheap.go:1299 +0x1ad fp=0x7ffc62705f58 sp=0x7ffc62705eb0 pc=0x46f5ad
+runtime.(*mheap).alloc.func1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mheap.go:1017 +0x5c fp=0x7ffc62705fa0 sp=0x7ffc62705f58 pc=0x46f07c
+runtime.(*mheap).alloc(0x7ffc62706020?, 0x56bd775fee00?, 0x80?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mheap.go:1011 +0x5b fp=0x7ffc62705fe8 sp=0x7ffc62705fa0 pc=0x46efdb
+runtime.(*mcentral).grow(0x7ffc627060f8?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mcentral.go:253 +0x36 fp=0x7ffc62706018 sp=0x7ffc62705fe8 pc=0x45a076
+runtime.(*mcentral).cacheSpan(0x19a0360)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mcentral.go:171 +0x42e fp=0x7ffc62706090 sp=0x7ffc62706018 pc=0x459f0e
+runtime.(*mcache).refill(0x3a1108, 0xa8?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mcache.go:184 +0x153 fp=0x7ffc627060d0 sp=0x7ffc62706090 pc=0x459533
+runtime.(*mcache).nextFree(0x3a1108, 0x20)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/malloc.go:968 +0x7e fp=0x7ffc62706108 sp=0x7ffc627060d0 pc=0x455a3e
+runtime.mallocgcSmallScanNoHeader(0xe0, 0x1137200)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/malloc.go:1378 +0x145 fp=0x7ffc62706168 sp=0x7ffc62706108 pc=0x4562e5
+runtime.mallocgc(0xe0, 0x1137200, 0x1)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/malloc.go:1066 +0xa5 fp=0x7ffc627061b8 sp=0x7ffc62706168 pc=0x4ba145
+runtime.newobject(0x4a210a?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/malloc.go:1747 +0x25 fp=0x7ffc627061e0 sp=0x7ffc627061b8 pc=0x456de5
+internal/cpu.doinit()
+	/mnt/oldrog/usr/local/dev-go/go/src/internal/cpu/cpu_x86.go:52 +0x1e fp=0x7ffc62706240 sp=0x7ffc627061e0 pc=0x4380fe
+internal/cpu.Initialize({0x0, 0x0})
+	/mnt/oldrog/usr/local/dev-go/go/src/internal/cpu/cpu.go:168 +0x1d fp=0x7ffc62706260 sp=0x7ffc62706240 pc=0x437b5d
+runtime.cpuinit(...)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:763
+runtime.schedinit()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:867 +0x109 fp=0x7ffc627062f0 sp=0x7ffc62706260 pc=0x4853e9
+runtime.rt0_go()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:349 +0x11c fp=0x7ffc627062f8 sp=0x7ffc627062f0 pc=0x4c2ffc

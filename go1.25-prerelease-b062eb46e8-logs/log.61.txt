@@ -1,0 +1,437 @@
+faketime = false
+=== RUN   Test040_remote_cancel_by_context
+
+cli_test.go:948 [goID 20] 2025-07-07 12:14:37.385216729 +0000 UTC server Start() returned serverAddr = '127.0.0.1:36089'
+
+cli.go:211 [goID 43] 2025-07-07 12:14:37.413231555 +0000 UTC connected to server 127.0.0.1:36089
+
+cli_test.go:982 [goID 20] 2025-07-07 12:14:37.921777119 +0000 UTC cli_test 040: about to block on test040callStarted
+
+cli_test.go:974 [goID 51] 2025-07-07 12:14:37.947495584 +0000 UTC client.Call() goro top about to call over net/rpc: MustBeCancelled.WillHangUntilCancel()
+example.go:300 server-side: WillHangUntilCancel() is running
+example.go:304 net.rpc API: our net.Conn has 
+local = '127.0.0.1:36089'
+remote = '127.0.0.1:41066'
+
+cli_test.go:984 [goID 20] 2025-07-07 12:14:38.527714928 +0000 UTC cli_test 040: we got past test040callStarted
+
+cli_test.go:988 [goID 20] 2025-07-07 12:14:38.527917653 +0000 UTC past cancelFunc()
+
+cli_test.go:977 [goID 51] 2025-07-07 12:14:38.529249533 +0000 UTC client.Call() returned with cliErr = 'cancellation request sent'
+
+cli_test.go:991 [goID 20] 2025-07-07 12:14:38.529460273 +0000 UTC past cliErrIsSet channel; cliErr40 = 'cancellation request sent'
+
+cli_test.go:998 [goID 20] 2025-07-07 12:14:38.529718484 +0000 UTC about to verify that server side context was cancelled.
+example.go:310 MustBeCancelled.WillHangUntilCancel(): ctx.Done() was closed!
+
+cli_test.go:1000 [goID 20] 2025-07-07 12:14:38.530947158 +0000 UTC server side saw the cancellation request: confirmed.
+example.go:324 server-side: MessageAPI_HangUntilCancel() is running
+example.go:326: Message API: our net.Conn has local = '127.0.0.1:36089'; remote = '127.0.0.1:41066'
+
+cli_test.go:1020 [goID 20] 2025-07-07 12:14:38.532823182 +0000 UTC cli_test 041: we got past test041callStarted
+
+cli_test.go:1024 [goID 20] 2025-07-07 12:14:38.533002012 +0000 UTC past cancelFunc()
+
+cli_test.go:1014 [goID 46] 2025-07-07 12:14:38.533435745 +0000 UTC client.Call() returned with cliErr = 'cancellation request sent'
+
+cli_test.go:1027 [goID 20] 2025-07-07 12:14:38.533620236 +0000 UTC past cliErrIsSet channel; cliErr = 'cancellation request sent'
+
+cli_test.go:1038 [goID 20] 2025-07-07 12:14:38.533793284 +0000 UTC about to verify that server side context was cancelled.
+example.go: MustBeCancelled.MessageAPI_HangUntilCancel(): ctx.Done() was closed!
+
+0 assertions thus far
+
+--- PASS: Test040_remote_cancel_by_context (1.16s)
+=== RUN   Test045_upload
+
+cli.go:1485 [goID 43] 2025-07-07 12:14:38.539162373 +0000 UTC rpc: client protocol error: 'shutting down'
+
+srv.go:585 [goID 45] 2025-07-07 12:14:38.539633418 +0000 UTC server sees io.EOF from receiveMessage
+
+cli.go:211 [goID 12] 2025-07-07 12:14:38.558705317 +0000 UTC connected to server 127.0.0.1:39071
+unexpected fault address 0x218400000000
+fatal error: fault
+unexpected fault address 0x4dec75187da8
+fatal error: fault
+[signal SIGSEGV: segmentation violation code=0x2 addr=0x4dec75187da8 pc=0x4dec75187da8]
+
+goroutine 49 gp=0xc10055f6c0 m=3 mp=0xc100071008 [running]:
+runtime.throw({0x13beda0?, 0x1?})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/panic.go:1094 +0x48 fp=0x4dec75187d20 sp=0x4dec75187cf0 pc=0x4bc9c8
+runtime: g 49: unexpected return pc for runtime.throw called from 0x1224ba9
+stack: frame={sp:0x4dec75187cf0, fp:0x4dec75187d20} stack=[0xc10035c000,0xc10035e000)
+
+created by github.com/glycerine/rpc25519.(*Client).runClientMain in goroutine 12
+	/home/jaten/rpc25519/cli.go:247 +0x16b5
+
+goroutine 1 gp=0xc100002380 m=nil [chan receive]:
+runtime.gopark(0x18?, 0xc1000a1008?, 0x20?, 0x41?, 0xc10036b590?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc10036b528 sp=0xc10036b508 pc=0x4bcb0e
+runtime.chanrecv(0xc10050c000, 0xc10036b60e, 0x1)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/chan.go:667 +0x3ee fp=0xc10036b5a0 sp=0xc10036b528 pc=0x44e28e
+runtime.chanrecv1(0x1982780?, 0x1114040?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/chan.go:509 +0x12 fp=0xc10036b5c8 sp=0xc10036b5a0 pc=0x44de72
+testing.(*T).Run(0xc100383180, {0x1229ff8, 0xe}, 0x1267a90)
+	/mnt/oldrog/usr/local/dev-go/go/src/testing/testing.go:2005 +0x9fe fp=0xc10036b708 sp=0xc10036b5c8 pc=0x61c9be
+testing.runTests.func1(0xc100383180)
+	/mnt/oldrog/usr/local/dev-go/go/src/testing/testing.go:2477 +0x86 fp=0xc10036b758 sp=0xc10036b708 pc=0x620f06
+testing.tRunner(0xc100383180, 0xc10011f960)
+	/mnt/oldrog/usr/local/dev-go/go/src/testing/testing.go:1934 +0x21d fp=0xc10036b828 sp=0xc10036b758 pc=0x61ad9d
+testing.runTests(0xc10048e888, {0x197ca00, 0x71, 0x71}, {0xffffffffffffffff?, 0x0?, 0x0?})
+	/mnt/oldrog/usr/local/dev-go/go/src/testing/testing.go:2475 +0x96d fp=0xc10036b990 sp=0xc10036b828 pc=0x620d6d
+testing.(*M).Run(0xc1003aa0a0)
+	/mnt/oldrog/usr/local/dev-go/go/src/testing/testing.go:2337 +0xed5 fp=0xc10036bd08 sp=0xc10036b990 pc=0x61e355
+github.com/glycerine/rpc25519.TestMain.func1(0xc10036be50, 0xc1003aa0a0)
+	/home/jaten/rpc25519/cli_test.go:71 +0x21a fp=0xc10036be40 sp=0xc10036bd08 pc=0xf6e45a
+github.com/glycerine/rpc25519.TestMain(0xc1003aa0a0)
+	/home/jaten/rpc25519/cli_test.go:72 +0x35 fp=0xc10036be68 sp=0xc10036be40 pc=0xf6e215
+main.main()
+	_testmain.go:447 +0x172 fp=0xc10036bf50 sp=0xc10036be68 pc=0x100c152
+runtime.main()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:285 +0x29d fp=0xc10036bfe0 sp=0xc10036bf50 pc=0x48423d
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc10036bfe8 sp=0xc10036bfe0 pc=0x4c5141
+
+goroutine 2 gp=0xc100002e00 m=nil [force gc (idle)]:
+runtime.gopark(0x1911690?, 0x1984b60?, 0x0?, 0x0?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc10006a7a8 sp=0xc10006a788 pc=0x4bcb0e
+runtime.goparkunlock(...)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:466
+runtime.forcegchelper()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:373 +0xb3 fp=0xc10006a7e0 sp=0xc10006a7a8 pc=0x484573
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc10006a7e8 sp=0xc10006a7e0 pc=0x4c5141
+created by runtime.init.7 in goroutine 1
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:361 +0x1a
+
+goroutine 3 gp=0xc100003340 m=nil [GC sweep wait]:
+runtime.gopark(0x1?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100086f80 sp=0xc100086f60 pc=0x4bcb0e
+runtime.goparkunlock(...)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:466
+runtime.bgsweep(0xc100032100)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgcsweep.go:323 +0xdf fp=0xc100086fc8 sp=0xc100086f80 pc=0x46b99f
+runtime.gcenable.gowrap1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:212 +0x25 fp=0xc100086fe0 sp=0xc100086fc8 pc=0x45f985
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100086fe8 sp=0xc100086fe0 pc=0x4c5141
+created by runtime.gcenable in goroutine 1
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:212 +0x66
+
+goroutine 4 gp=0xc100003500 m=nil [runnable]:
+runtime.gopark(0x10000?, 0x13bd0e0?, 0x0?, 0x0?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc10006b778 sp=0xc10006b758 pc=0x4bcb0e
+runtime.goparkunlock(...)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:466
+runtime.(*scavengerState).park(0x1983240)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgcscavenge.go:425 +0x49 fp=0xc10006b7a8 sp=0xc10006b778 pc=0x469429
+runtime.bgscavenge(0xc100032100)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgcscavenge.go:658 +0x59 fp=0xc10006b7c8 sp=0xc10006b7a8 pc=0x4699d9
+runtime.gcenable.gowrap2()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:213 +0x25 fp=0xc10006b7e0 sp=0xc10006b7c8 pc=0x45f925
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc10006b7e8 sp=0xc10006b7e0 pc=0x4c5141
+created by runtime.gcenable in goroutine 1
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:213 +0xa5
+
+goroutine 5 gp=0xc100003dc0 m=nil [cleanup wait]:
+runtime.gopark(0x42f768029200?, 0xc100082f68?, 0x15?, 0x3e?, 0x42f768029200?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100082f40 sp=0xc100082f20 pc=0x4bcb0e
+runtime.goparkunlock(...)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:466
+runtime.(*cleanupQueue).dequeue(0x1983840)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mcleanup.go:439 +0xc5 fp=0xc100082f78 sp=0xc100082f40 pc=0x45b6a5
+runtime.runCleanups()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mcleanup.go:635 +0x45 fp=0xc100082fe0 sp=0xc100082f78 pc=0x45bd65
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100082fe8 sp=0xc100082fe0 pc=0x4c5141
+created by runtime.(*cleanupQueue).createGs in goroutine 1
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mcleanup.go:589 +0xa5
+
+goroutine 6 gp=0xc100314000 m=nil [select, locked to thread]:
+runtime.gopark(0xc100080fa8?, 0x2?, 0x60?, 0x0?, 0xc100080f94?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100080de8 sp=0xc100080dc8 pc=0x4bcb0e
+runtime.selectgo(0xc100080fa8, 0xc100080f90, 0x0?, 0x0, 0x2?, 0x1)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/select.go:351 +0x957 fp=0xc100080f58 sp=0xc100080de8 pc=0x4983d7
+runtime.ensureSigM.func1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/signal_unix.go:1085 +0x194 fp=0xc100080fe0 sp=0xc100080f58 pc=0x4b6af4
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100080fe8 sp=0xc100080fe0 pc=0x4c5141
+created by runtime.ensureSigM in goroutine 1
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/signal_unix.go:1068 +0xc5
+
+goroutine 18 gp=0xc100382700 m=6 mp=0xc1000a0808 [syscall]:
+runtime.notetsleepg(0x19a6260, 0xffffffffffffffff)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/lock_futex.go:123 +0x29 fp=0xc10006bfa0 sp=0xc10006bf78 pc=0x4542e9
+os/signal.signal_recv()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/sigqueue.go:152 +0x29 fp=0xc10006bfc0 sp=0xc10006bfa0 pc=0x4bf049
+os/signal.loop()
+	/mnt/oldrog/usr/local/dev-go/go/src/os/signal/signal_unix.go:23 +0x1d fp=0xc10006bfe0 sp=0xc10006bfc0 pc=0x6d043d
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc10006bfe8 sp=0xc10006bfe0 pc=0x4c5141
+created by os/signal.Notify.func1.1 in goroutine 1
+	/mnt/oldrog/usr/local/dev-go/go/src/os/signal/signal.go:152 +0x47
+
+goroutine 19 gp=0xc1003828c0 m=nil [chan receive]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100404e18 sp=0xc100404df8 pc=0x4bcb0e
+runtime.chanrecv(0xc1001d1d50, 0xc100404f98, 0x1)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/chan.go:667 +0x3ee fp=0xc100404e90 sp=0xc100404e18 pc=0x44e28e
+runtime.chanrecv2(0x0?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/chan.go:514 +0x12 fp=0xc100404eb8 sp=0xc100404e90 pc=0x44de92
+github.com/glycerine/rpc25519.init.1.func1()
+	/home/jaten/rpc25519/filterstacks.go:22 +0x28c fp=0xc100404fe0 sp=0xc100404eb8 pc=0xfe508c
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100404fe8 sp=0xc100404fe0 pc=0x4c5141
+created by github.com/glycerine/rpc25519.init.1 in goroutine 1
+	/home/jaten/rpc25519/filterstacks.go:21 +0xca
+
+goroutine 47 gp=0xc100383500 m=nil [select]:
+runtime.gopark(0xc1000287f0?, 0xe8bf49?, 0x20?, 0xce?, 0xc1000471e2?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100047030 sp=0xc100047010 pc=0x4bcb0e
+runtime.selectgo(0xc100047298, 0xc1000471dc, 0x13eb2c0?, 0x1, 0xc1005b8010?, 0x1)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/select.go:351 +0x957 fp=0xc1000471a0 sp=0xc100047030 pc=0x4983d7
+github.com/glycerine/rpc25519.(*Client).oneWaySendHelper(0xc100568408, 0xc1005be000, 0xc1005fe070, 0x0?)
+	/home/jaten/rpc25519/cli.go:2247 +0x18c fp=0xc1000472d8 sp=0xc1000471a0 pc=0xe8bfac
+github.com/glycerine/rpc25519.(*Client).OneWaySend(0xc100568408, 0xc1005be000, 0xc1005fe070, 0x0)
+	/home/jaten/rpc25519/cli.go:2241 +0x49a fp=0xc1000473a8 sp=0xc1000472d8 pc=0xe8bc1a
+github.com/glycerine/rpc25519.(*Client).UploadBegin(0xc100568408, {0x13cbb90, 0xc1005bc2d0}, {0x122a34e, 0xe}, 0xc1005be000, 0x0)
+	/home/jaten/rpc25519/cli.go:2032 +0x173 fp=0xc100047458 sp=0xc1000473a8 pc=0xe8a413
+github.com/glycerine/rpc25519.Test045_upload.func1()
+	/home/jaten/rpc25519/cli_test.go:1097 +0x915 fp=0xc100047868 sp=0xc100047458 pc=0xf76b75
+github.com/glycerine/goconvey/convey.discover.parseAction.func1({0xc100524138?, 0xc1003b6330?})
+	/home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/discovery.go:80 +0x2f fp=0xc100047888 sp=0xc100047868 pc=0xe56d6f
+github.com/glycerine/goconvey/convey.(*context).conveyInner(0xc100408060, {0x12507e8, 0x32}, 0xc1003b8600)
+	/home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/context.go:264 +0x2ad fp=0xc1000479d0 sp=0xc100047888 pc=0xe55dcd
+github.com/glycerine/goconvey/convey.rootConvey.func1()
+	/home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/context.go:113 +0x1a5 fp=0xc100047a88 sp=0xc1000479d0 pc=0xe54125
+github.com/jtolds/gls.(*ContextManager).SetValues.func1(0x0)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/context.go:97 +0x667 fp=0xc100047c58 sp=0xc100047a88 pc=0xe507e7
+github.com/jtolds/gls.EnsureGoroutineId.func1()
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/gid.go:24 +0x39 fp=0xc100047c80 sp=0xc100047c58 pc=0xe50e19
+github.com/jtolds/gls._m(0x0, 0xc100524198)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/stack_tags.go:108 +0x39 fp=0xc100047ca8 sp=0xc100047c80 pc=0xe53699
+github.com/jtolds/gls.github_com_jtolds_gls_markS(0x0, 0xc100524198)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/stack_tags.go:56 +0x34 fp=0xc100047cc8 sp=0xc100047ca8 pc=0xe53034
+github.com/jtolds/gls.addStackTag(...)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/stack_tags.go:49
+github.com/jtolds/gls.EnsureGoroutineId(0xc1003b62a0)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/gid.go:24 +0x15d fp=0xc100047d48 sp=0xc100047cc8 pc=0xe50d7d
+github.com/jtolds/gls.(*ContextManager).SetValues(0xc100042830, 0xc1003b6240, 0xc1005a4100)
+	/home/jaten/go/pkg/mod/github.com/jtolds/gls@v4.20.0+incompatible/context.go:63 +0x27d fp=0xc100047d98 sp=0xc100047d48 pc=0xe5011d
+github.com/glycerine/goconvey/convey.rootConvey({0xc100401ea0, 0x3, 0x3})
+	/home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/context.go:108 +0x465 fp=0xc100047e50 sp=0xc100047d98 pc=0xe53ea5
+github.com/glycerine/goconvey/convey.Convey({0xc100401ea0, 0x3, 0x3})
+	/home/jaten/go/pkg/mod/github.com/glycerine/goconvey@v0.0.0-20190410193231-58a59202ab31/convey/doc.go:73 +0x9b fp=0xc100047e80 sp=0xc100047e50 pc=0xe56e3b
+github.com/glycerine/rpc25519.Test045_upload(0xc100314a80)
+	/home/jaten/rpc25519/cli_test.go:1050 +0x10f fp=0xc100047ee0 sp=0xc100047e80 pc=0xf7622f
+testing.tRunner(0xc100314a80, 0x1267a90)
+	/mnt/oldrog/usr/local/dev-go/go/src/testing/testing.go:1934 +0x21d fp=0xc100047fb0 sp=0xc100047ee0 pc=0x61ad9d
+testing.(*T).Run.gowrap1()
+	/mnt/oldrog/usr/local/dev-go/go/src/testing/testing.go:1997 +0x45 fp=0xc100047fe0 sp=0xc100047fb0 pc=0x61cc65
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100047fe8 sp=0xc100047fe0 pc=0x4c5141
+created by testing.(*T).Run in goroutine 1
+	/mnt/oldrog/usr/local/dev-go/go/src/testing/testing.go:1997 +0x9d3
+
+goroutine 48 gp=0xc100383880 m=nil [IO wait]:
+runtime.gopark(0xecbc01d1f905452d?, 0x3316a18df494a915?, 0x18?, 0x41?, 0xcf00c98200?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xcf00ca17d0 sp=0xcf00ca17b0 pc=0x4bcb0e
+runtime.netpollblock(0x4c87d1?, 0x5308ea?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/netpoll.go:575 +0xf7 fp=0xcf00ca1808 sp=0xcf00ca17d0 pc=0x47ca57
+internal/poll.runtime_pollWait(0x337d63aaa400, 0x72)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/netpoll.go:351 +0x85 fp=0xcf00ca1828 sp=0xcf00ca1808 pc=0x4bbcc5
+internal/poll.(*pollDesc).wait(0xcf00c98220, 0x72, 0x0)
+	/mnt/oldrog/usr/local/dev-go/go/src/internal/poll/fd_poll_runtime.go:84 +0xb1 fp=0xcf00ca1868 sp=0xcf00ca1828 pc=0x5289b1
+internal/poll.(*pollDesc).waitRead(...)
+	/mnt/oldrog/usr/local/dev-go/go/src/internal/poll/fd_poll_runtime.go:89
+internal/poll.(*FD).Accept(0xcf00c98200)
+	/mnt/oldrog/usr/local/dev-go/go/src/internal/poll/fd_unix.go:613 +0x4ea fp=0xcf00ca1970 sp=0xcf00ca1868 pc=0x5308ea
+net.(*netFD).accept(0xcf00c98200)
+	/mnt/oldrog/usr/local/dev-go/go/src/net/fd_unix.go:161 +0x45 fp=0xcf00ca1a80 sp=0xcf00ca1970 pc=0x845ce5
+net.(*TCPListener).accept(0xc1003b4d80)
+	/mnt/oldrog/usr/local/dev-go/go/src/net/tcpsock_posix.go:159 +0x4e fp=0xcf00ca1b20 sp=0xcf00ca1a80 pc=0x86afce
+net.(*TCPListener).Accept(0xc1003b4d80)
+	/mnt/oldrog/usr/local/dev-go/go/src/net/tcpsock.go:380 +0x65 fp=0xcf00ca1b90 sp=0xcf00ca1b20 pc=0x869385
+crypto/tls.(*listener).Accept(0xc1005247c8)
+	/mnt/oldrog/usr/local/dev-go/go/src/crypto/tls/tls.go:79 +0x43 fp=0xcf00ca1be8 sp=0xcf00ca1b90 pc=0x981d63
+github.com/glycerine/rpc25519.(*Server).runServerMain(0xc100314c40, {0x122809d, 0xb}, 0x0, {0x0, 0x0}, 0xc10050e690)
+	/home/jaten/rpc25519/srv.go:218 +0x12b5 fp=0xcf00ca1f60 sp=0xcf00ca1be8 pc=0xf30775
+github.com/glycerine/rpc25519.(*Server).Start.gowrap1()
+	/home/jaten/rpc25519/srv.go:2281 +0x8f fp=0xcf00ca1fe0 sp=0xcf00ca1f60 pc=0xf4274f
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xcf00ca1fe8 sp=0xcf00ca1fe0 pc=0x4c5141
+created by github.com/glycerine/rpc25519.(*Server).Start in goroutine 47
+	/home/jaten/rpc25519/srv.go:2281 +0xa7e
+
+goroutine 34 gp=0xc10055e000 m=nil [finalizer wait]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0xf30d40?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100400e20 sp=0xc100400e00 pc=0x4bcb0e
+runtime.runFinalizers()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mfinal.go:210 +0x145 fp=0xc100400fe0 sp=0xc100400e20 pc=0x45e885
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100400fe8 sp=0xc100400fe0 pc=0x4c5141
+created by runtime.createfing in goroutine 21
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mfinal.go:172 +0x3d
+
+goroutine 35 gp=0xc10055e1c0 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100579f38 sp=0xc100579f18 pc=0x4bcb0e
+runtime.gcBgMarkWorker(0xc1005461c0)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1463 +0xeb fp=0xc100579fc8 sp=0xc100579f38 pc=0x46206b
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x25 fp=0xc100579fe0 sp=0xc100579fc8 pc=0x461f45
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100579fe8 sp=0xc100579fe0 pc=0x4c5141
+created by runtime.gcBgMarkStartWorkers in goroutine 20
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x105
+
+goroutine 36 gp=0xc10055e380 m=nil [GC worker (idle)]:
+runtime.gopark(0x4c6839?, 0x4c87d1?, 0x41?, 0x51?, 0xf30ba5?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100578f38 sp=0xc100578f18 pc=0x4bcb0e
+runtime.gcBgMarkWorker(0xc1005461c0)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1463 +0xeb fp=0xc100578fc8 sp=0xc100578f38 pc=0x46206b
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x25 fp=0xc100578fe0 sp=0xc100578fc8 pc=0x461f45
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100578fe8 sp=0xc100578fe0 pc=0x4c5141
+created by runtime.gcBgMarkStartWorkers in goroutine 20
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x105
+
+goroutine 37 gp=0xc10055e540 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100577f38 sp=0xc100577f18 pc=0x4bcb0e
+runtime.gcBgMarkWorker(0xc1005461c0)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1463 +0xeb fp=0xc100577fc8 sp=0xc100577f38 pc=0x46206b
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x25 fp=0xc100577fe0 sp=0xc100577fc8 pc=0x461f45
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100577fe8 sp=0xc100577fe0 pc=0x4c5141
+created by runtime.gcBgMarkStartWorkers in goroutine 20
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x105
+
+goroutine 38 gp=0xc10055e700 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100576f38 sp=0xc100576f18 pc=0x4bcb0e
+runtime.gcBgMarkWorker(0xc1005461c0)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1463 +0xeb fp=0xc100576fc8 sp=0xc100576f38 pc=0x46206b
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x25 fp=0xc100576fe0 sp=0xc100576fc8 pc=0x461f45
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100576fe8 sp=0xc100576fe0 pc=0x4c5141
+created by runtime.gcBgMarkStartWorkers in goroutine 20
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x105
+
+goroutine 39 gp=0xc10055e8c0 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100575f38 sp=0xc100575f18 pc=0x4bcb0e
+runtime.gcBgMarkWorker(0xc1005461c0)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1463 +0xeb fp=0xc100575fc8 sp=0xc100575f38 pc=0x46206b
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x25 fp=0xc100575fe0 sp=0xc100575fc8 pc=0x461f45
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100575fe8 sp=0xc100575fe0 pc=0x4c5141
+created by runtime.gcBgMarkStartWorkers in goroutine 20
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x105
+
+goroutine 40 gp=0xc10055ea80 m=nil [GC worker (idle)]:
+runtime.gopark(0x5fc2f0ea14691?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100574f38 sp=0xc100574f18 pc=0x4bcb0e
+runtime.gcBgMarkWorker(0xc1005461c0)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1463 +0xeb fp=0xc100574fc8 sp=0xc100574f38 pc=0x46206b
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x25 fp=0xc100574fe0 sp=0xc100574fc8 pc=0x461f45
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100574fe8 sp=0xc100574fe0 pc=0x4c5141
+created by runtime.gcBgMarkStartWorkers in goroutine 20
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x105
+
+goroutine 41 gp=0xc10055ec40 m=nil [GC worker (idle)]:
+runtime.gopark(0x5fc2f2e5a425c?, 0x1?, 0x48?, 0x43?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100573f38 sp=0xc100573f18 pc=0x4bcb0e
+runtime.gcBgMarkWorker(0xc1005461c0)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1463 +0xeb fp=0xc100573fc8 sp=0xc100573f38 pc=0x46206b
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x25 fp=0xc100573fe0 sp=0xc100573fc8 pc=0x461f45
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100573fe8 sp=0xc100573fe0 pc=0x4c5141
+created by runtime.gcBgMarkStartWorkers in goroutine 20
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x105
+
+goroutine 42 gp=0xc10055ee00 m=nil [GC worker (idle)]:
+runtime.gopark(0x5fc2f3316538c?, 0x1?, 0xcf?, 0x4e?, 0x0?)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/proc.go:460 +0xce fp=0xc100572f38 sp=0xc100572f18 pc=0x4bcb0e
+runtime.gcBgMarkWorker(0xc1005461c0)
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1463 +0xeb fp=0xc100572fc8 sp=0xc100572f38 pc=0x46206b
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x25 fp=0xc100572fe0 sp=0xc100572fc8 pc=0x461f45
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc100572fe8 sp=0xc100572fe0 pc=0x4c5141
+created by runtime.gcBgMarkStartWorkers in goroutine 20
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/mgc.go:1373 +0x105
+
+goroutine 12 gp=0xc10055efc0 m=nil [runnable]:
+github.com/klauspost/compress/zstd.(*bestFastEncoder).Reset(0xdd00000000, 0x0, 0x0)
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/enc_best.go:488 +0x1045 fp=0xcf00cb1368 sp=0xcf00cb1360 pc=0xcb5ca5
+github.com/klauspost/compress/zstd.(*Encoder).Reset(0xcf00cb8b40, {0x13c53a0, 0x19a5580})
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/encoder.go:122 +0x6ec fp=0xcf00cb1488 sp=0xcf00cb1368 pc=0xcd494c
+github.com/klauspost/compress/zstd.NewWriter({0x13c53a0, 0x19a5580}, {0xcf00cb15d8, 0x1, 0x1984b60?})
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/encoder.go:78 +0x1ea fp=0xcf00cb1510 sp=0xcf00cb1488 pc=0xcd3f8a
+github.com/glycerine/rpc25519.newPressor(0x140000)
+	/home/jaten/rpc25519/compress.go:134 +0x36f fp=0xcf00cb1630 sp=0xcf00cb1510 pc=0xe953cf
+github.com/glycerine/rpc25519.newWorkspace({0xc10053c2d0, 0x14}, 0x13ffb0, 0x0, 0xc10054a420, 0x0, 0xc10053c2a0)
+	/home/jaten/rpc25519/common.go:148 +0x448 fp=0xcf00cb16e0 sp=0xcf00cb1630 pc=0xe92c88
+github.com/glycerine/rpc25519.newBlabber({0x122b99d, 0x10}, {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ...}, ...)
+	/home/jaten/rpc25519/chacha.go:246 +0x912 fp=0xcf00cb1808 sp=0xcf00cb16e0 pc=0xe5ab52
+github.com/glycerine/rpc25519.(*Client).runReadLoop(0xc100568408, {0x13ce728, 0xc100328388}, 0xc10053c2a0)
+	/home/jaten/rpc25519/cli.go:342 +0x30e fp=0xcf00cb1a08 sp=0xcf00cb1808 pc=0xe8064e
+github.com/glycerine/rpc25519.(*Client).runClientMain(0xc100568408, {0xc100504ae1, 0xf}, 0x0, {0x0, 0x0})
+	/home/jaten/rpc25519/cli.go:248 +0x16d9 fp=0xcf00cb1f70 sp=0xcf00cb1a08 pc=0xe7ee19
+github.com/glycerine/rpc25519.(*Client).Start.gowrap1()
+	/home/jaten/rpc25519/cli.go:1677 +0x79 fp=0xcf00cb1fe0 sp=0xcf00cb1f70 pc=0xe87db9
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xcf00cb1fe8 sp=0xcf00cb1fe0 pc=0x4c5141
+created by github.com/glycerine/rpc25519.(*Client).Start in goroutine 47
+	/home/jaten/rpc25519/cli.go:1677 +0x3f6
+
+goroutine 66 gp=0xc10055fdc0 m=nil [runnable]:
+github.com/klauspost/compress/zstd.(*bestFastEncoder).Reset(0xda00000000, 0x0, 0x0)
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/enc_best.go:488 +0x1045 fp=0xc1004d3900 sp=0xc1004d38f8 pc=0xcb5ca5
+github.com/klauspost/compress/zstd.(*Encoder).Reset(0xcf00c0c500, {0x13c53a0, 0x19a5580})
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/encoder.go:122 +0x6ec fp=0xc1004d3a20 sp=0xc1004d3900 pc=0xcd494c
+github.com/klauspost/compress/zstd.NewWriter({0x13c53a0, 0x19a5580}, {0xc1004d3b70, 0x1, 0x4c6bcc?})
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/encoder.go:78 +0x1ea fp=0xc1004d3aa8 sp=0xc1004d3a20 pc=0xcd3f8a
+github.com/glycerine/rpc25519.newPressor(0x140000)
+	/home/jaten/rpc25519/compress.go:134 +0x36f fp=0xc1004d3bc8 sp=0xc1004d3aa8 pc=0xe953cf
+github.com/glycerine/rpc25519.newBlabber({0x122bb2d, 0x10}, {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ...}, ...)
+	/home/jaten/rpc25519/chacha.go:226 +0x2c5 fp=0xc1004d3cf0 sp=0xc1004d3bc8 pc=0xe5a505
+github.com/glycerine/rpc25519.(*rwPair).runSendLoop(0xc1005ca308, {0x13ce728, 0xc1001d5508})
+	/home/jaten/rpc25519/srv.go:443 +0x31e fp=0xc1004d3fa0 sp=0xc1004d3cf0 pc=0xf325de
+github.com/glycerine/rpc25519.(*Server).serveConn.gowrap1()
+	/home/jaten/rpc25519/srv.go:361 +0x50 fp=0xc1004d3fe0 sp=0xc1004d3fa0 pc=0xf31fb0
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xc1004d3fe8 sp=0xc1004d3fe0 pc=0x4c5141
+created by github.com/glycerine/rpc25519.(*Server).serveConn in goroutine 13
+	/home/jaten/rpc25519/srv.go:361 +0x3b7
+
+goroutine 67 gp=0xc100002000 m=nil [runnable]:
+github.com/klauspost/compress/zstd.(*bestFastEncoder).Reset(0xde00000000, 0x0, 0x0)
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/enc_best.go:488 +0x1045 fp=0xcf0335d8b8 sp=0xcf0335d8b0 pc=0xcb5ca5
+github.com/klauspost/compress/zstd.(*Encoder).Reset(0xcf03332f00, {0x13c53a0, 0x19a5580})
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/encoder.go:122 +0x6ec fp=0xcf0335d9d8 sp=0xcf0335d8b8 pc=0xcd494c
+github.com/klauspost/compress/zstd.NewWriter({0x13c53a0, 0x19a5580}, {0xcf0335db28, 0x1, 0xc1000a1008?})
+	/home/jaten/go/pkg/mod/github.com/klauspost/compress@v1.17.11/zstd/encoder.go:78 +0x1ea fp=0xcf0335da60 sp=0xcf0335d9d8 pc=0xcd3f8a
+github.com/glycerine/rpc25519.newPressor(0x140000)
+	/home/jaten/rpc25519/compress.go:134 +0x36f fp=0xcf0335db80 sp=0xcf0335da60 pc=0xe953cf
+github.com/glycerine/rpc25519.newWorkspace({0xc1001f40f0, 0x14}, 0x13ffb0, 0x1, 0xc1004d62c0, 0xc1005ca308, 0x0)
+	/home/jaten/rpc25519/common.go:148 +0x448 fp=0xcf0335dc30 sp=0xcf0335db80 pc=0xe92c88
+github.com/glycerine/rpc25519.newBlabber({0x122bb3d, 0x10}, {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ...}, ...)
+	/home/jaten/rpc25519/chacha.go:246 +0x912 fp=0xcf0335dd58 sp=0xcf0335dc30 pc=0xe5ab52
+github.com/glycerine/rpc25519.(*rwPair).runReadLoop(0xc1005ca308, {0x13ce728, 0xc1001d5508})
+	/home/jaten/rpc25519/srv.go:563 +0x47a fp=0xcf0335dfa0 sp=0xcf0335dd58 pc=0xf336fa
+github.com/glycerine/rpc25519.(*Server).serveConn.gowrap2()
+	/home/jaten/rpc25519/srv.go:362 +0x50 fp=0xcf0335dfe0 sp=0xcf0335dfa0 pc=0xf31f30
+runtime.goexit({})
+	/mnt/oldrog/usr/local/dev-go/go/src/runtime/asm_amd64.s:1693 +0x1 fp=0xcf0335dfe8 sp=0xcf0335dfe0 pc=0x4c5141
+created by github.com/glycerine/rpc25519.(*Server).serveConn in goroutine 13
+	/home/jaten/rpc25519/srv.go:362 +0x47d

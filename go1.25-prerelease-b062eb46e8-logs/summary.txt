@@ -1,0 +1,26 @@
+runs 3, 36, 45, 47, 61, and 96 show problems.
+
+jaten@rog ~/go/src/github.com/glycerine/rr_binary_for_issue74019/go1.25-prerelease-b062eb46e8-logs (master) $ grep -i race *
+log.36.txt:	/mnt/oldrog/usr/local/dev-go/go/src/runtime/traceback.go:470 +0x249 fp=0x55cc4e2cad88 sp=0x55cc4e2cad10 pc=0x4a97a9
+log.3.txt:	/mnt/oldrog/usr/local/dev-go/go/src/runtime/traceback.go:470 +0x249 fp=0x4bda56908d88 sp=0x4bda56908d10 pc=0x4a97a9
+log.45.txt:=== Start rr backtrace:
+log.45.txt:=== End rr backtrace
+log.47.txt:...ThreadSanitizer: CHECK failed: tsan_rtl_thread.cpp:259 "((parts->Queued(trace.local_head))) != (0)" (0x0, 0x0) (tid=4049865)
+log.48.txt:ThreadSanitizer: CHECK failed: tsan_rtl_thread.cpp:259 "((parts->Queued(trace.local_head))) != (0)" (0x0, 0x0) (tid=4049907)
+log.96.txt:fatal error: too many address space collisions for -race mode
+jaten@rog ~/go/src/github.com/glycerine/rr_binary_for_issue74019/go1.25-prerelease-b062eb46e8-logs (master) $
+
+jaten@rog ~/go/src/github.com/glycerine/rr_binary_for_issue74019/go1.25-prerelease-b062eb46e8-logs (master) $ grep panic *
+log.36.txt:runtime: g 24: unexpected return pc for runtime.sigpanic called from 0x55cc4e2cae30
+log.36.txt:	/mnt/oldrog/usr/local/dev-go/go/src/runtime/panic.go:1094 +0x48 fp=0x55cc4e2cad10 sp=0x55cc4e2cace0 pc=0x4bc9c8
+log.36.txt:runtime.(*_panic).nextFrame.func1()
+log.36.txt:	/mnt/oldrog/usr/local/dev-go/go/src/runtime/panic.go:957 +0xa6 fp=0x55cc4e2cae40 sp=0x55cc4e2cad88 pc=0x480706
+log.3.txt:runtime: g 1: unexpected return pc for runtime.sigpanic called from 0x4bda56908db8
+log.3.txt:	/mnt/oldrog/usr/local/dev-go/go/src/runtime/panic.go:1094 +0x48 fp=0x4bda56908d10 sp=0x4bda56908ce0 pc=0x4bc9c8
+log.3.txt:runtime.(*_panic).nextFrame.func1()
+log.3.txt:	/mnt/oldrog/usr/local/dev-go/go/src/runtime/panic.go:957 +0xa6 fp=0x4bda56908e40 sp=0x4bda56908d88 pc=0x480706
+log.42.txt:	/mnt/oldrog/usr/local/dev-go/go/src/runtime/panic.go:1094 +0x48 fp=0x6d3731108cd0 sp=0x6d3731108ca0 pc=0x4bc9c8
+log.61.txt:	/mnt/oldrog/usr/local/dev-go/go/src/runtime/panic.go:1094 +0x48 fp=0x4dec75187d20 sp=0x4dec75187cf0 pc=0x4bc9c8
+log.96.txt:	/mnt/oldrog/usr/local/dev-go/go/src/runtime/panic.go:1094 +0x48 fp=0x7ffc62705d88 sp=0x7ffc62705d58 pc=0x4bc9c8
+jaten@rog ~/go/src/github.com/glycerine/rr_binary_for_issue74019/go1.25-prerelease-b062eb46e8-logs (master) $
+

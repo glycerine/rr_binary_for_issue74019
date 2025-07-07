@@ -1583,3 +1583,12 @@ rr pack
 
 done
 ~~~
+
+# checking on go1.25-prerelease at b062eb46e8
+
+The directory rr-traces-go1.25-prerelease-b062eb46e8/ herein has the traces.
+
+The directory go1.25-prerelease-b062eb46e8-logs/ herein has the logs.
+
+runs 3, 36, 45, 47, 61, and 96 show problems.
+
