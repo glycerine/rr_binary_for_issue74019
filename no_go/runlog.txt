@@ -1,0 +1,636 @@
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $ ./memcpy_race 
+addr1=0x720400000003 
+addr2=0x720400000005 
+==================
+WARNING: ThreadSanitizer: data race (pid=2606222)
+  Write of size 4 at 0x720400000003 by thread T2:
+    #0 __tsan_memcpy <null> (memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 Thread2(void*) /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:19:3 (memcpy_race+0xe0dd1) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Previous write of size 1 at 0x720400000005 by thread T1:
+    #0 __tsan_memcpy <null> (memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 Thread1(void*) /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:11:3 (memcpy_race+0xe0d35) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Location is heap block of size 10 at 0x720400000000 allocated by main thread:
+    #0 operator new[](unsigned long) <null> (memcpy_race+0xdfcfb) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 __cxx_global_var_init /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:5:14 (memcpy_race+0x2f384) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #2 _GLOBAL__sub_I_memcpy_race.cpp /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp (memcpy_race+0x2f384)
+    #3 call_init csu/../csu/libc-start.c:145:3 (libc.so.6+0x2a303) (BuildId: 274eec488d230825a136fa9c4d85370fed7a0a5e)
+
+  Thread T2 (tid=2606225, running) created by main thread at:
+    #0 pthread_create <null> (memcpy_race+0x6068f) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 main /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:29:3 (memcpy_race+0xe0ea2) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Thread T1 (tid=2606224, finished) created by main thread at:
+    #0 pthread_create <null> (memcpy_race+0x6068f) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 main /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:28:3 (memcpy_race+0xe0e8a) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+SUMMARY: ThreadSanitizer: data race (/mnt/oldrog/home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3) in __tsan_memcpy
+==================
+ThreadSanitizer: reported 1 warnings
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $ which rr
+/usr/local/bin/rr
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $ rr record -h ./memcpy_race 
+rr: Saving execution to trace directory `/mnt/oldrog/home/jaten/go/src/github.com/glycerine/rr_binary_for_issue74019/on_go1.25.3_external_link/memcpy_race-0'.
+addr1=0x720400000003 
+addr2=0x720400000005 
+==================
+WARNING: ThreadSanitizer: data race (pid=2607030)
+  Write of size 4 at 0x720400000003 by thread T2:
+    #0 __tsan_memcpy <null> (memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 Thread2(void*) /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:19:3 (memcpy_race+0xe0dd1) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Previous write of size 1 at 0x720400000005 by thread T1:
+    #0 __tsan_memcpy <null> (memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 Thread1(void*) /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:11:3 (memcpy_race+0xe0d35) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Location is heap block of size 10 at 0x720400000000 allocated by main thread:
+    #0 operator new[](unsigned long) <null> (memcpy_race+0xdfcfb) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 __cxx_global_var_init /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:5:14 (memcpy_race+0x2f384) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #2 _GLOBAL__sub_I_memcpy_race.cpp /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp (memcpy_race+0x2f384)
+    #3 call_init csu/../csu/libc-start.c:145:3 (libc.so.6+0x2a303) (BuildId: 274eec488d230825a136fa9c4d85370fed7a0a5e)
+
+  Thread T2 (tid=2607033, running) created by main thread at:
+    #0 pthread_create <null> (memcpy_race+0x6068f) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 main /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:29:3 (memcpy_race+0xe0ea2) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Thread T1 (tid=2607032, running) created by main thread at:
+    #0 pthread_create <null> (memcpy_race+0x6068f) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 main /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:28:3 (memcpy_race+0xe0e8a) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+SUMMARY: ThreadSanitizer: data race (/mnt/oldrog/home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3) in __tsan_memcpy
+==================
+ThreadSanitizer: reported 1 warnings
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $ mkdir log
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $ for i in `seq 1 100`; do rr record -h ./memcpy_race  &> log/log.$i; done
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $ 
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $ ls -al
+total 2748
+drwx------   8 jaten jaten   16384 Dec 22 09:18 .
+drwx------  30 jaten jaten    4096 Dec 22 07:43 ..
+-rw-------   1 jaten jaten     895 Jul  7 18:19 aligned_vs_unaligned_race.cpp
+-rw-------   1 jaten jaten     836 Jul  7 18:19 annotate_happens_before.cpp
+-rw-------   1 jaten jaten     426 Jul  7 18:19 atexit2.cpp
+-rw-------   1 jaten jaten     634 Jul  7 18:19 atexit3.cpp
+-rw-------   1 jaten jaten     736 Jul  7 18:19 atexit4.cpp
+-rw-------   1 jaten jaten     701 Jul  7 18:19 atexit5.cpp
+-rw-------   1 jaten jaten     448 Jul  7 18:19 atexit.cpp
+-rw-------   1 jaten jaten     441 Jul  7 18:19 atomic_free2.cpp
+-rw-------   1 jaten jaten     612 Jul  7 18:19 atomic_free3.cpp
+-rw-------   1 jaten jaten     940 Jul  7 18:19 atomic_free.cpp
+-rw-------   1 jaten jaten     726 Jul  7 18:19 atomic_hle.cpp
+-rw-------   1 jaten jaten    1198 Jul  7 18:19 atomic_norace2.cpp
+-rw-------   1 jaten jaten    1538 Jul  7 18:19 atomic_norace.cpp
+-rw-------   1 jaten jaten    2055 Jul  7 18:19 atomic_race.cpp
+-rw-------   1 jaten jaten     621 Jul  7 18:19 atomic_stack.cpp
+-rw-------   1 jaten jaten    1218 Jul  7 18:19 atomic_store.cpp
+-rw-------   1 jaten jaten    1024 Jul  7 18:19 barrier.cpp
+-rw-------   1 jaten jaten     419 Jul  7 18:19 bench_acquire_only.cpp
+-rw-------   1 jaten jaten     380 Jul  7 18:19 bench_acquire_release.cpp
+-rw-------   1 jaten jaten    1016 Jul  7 18:19 bench.h
+-rw-------   1 jaten jaten     724 Jul  7 18:19 bench_local_mutex.cpp
+-rw-------   1 jaten jaten     521 Jul  7 18:19 bench_malloc.cpp
+-rw-------   1 jaten jaten    2789 Jul  7 18:19 bench_memory_access.cpp
+-rw-------   1 jaten jaten     591 Jul  7 18:19 bench_mutex.cpp
+-rw-------   1 jaten jaten     636 Jul  7 18:19 bench_release_only.cpp
+-rw-------   1 jaten jaten     574 Jul  7 18:19 bench_rwmutex.cpp
+-rw-------   1 jaten jaten    1151 Jul  7 18:19 bench_shadow_flush.cpp
+-rw-------   1 jaten jaten     502 Jul  7 18:19 bench_single_writer.cpp
+-rw-------   1 jaten jaten     589 Jul  7 18:19 bench_ten_mutexes.cpp
+-rw-------   1 jaten jaten    1288 Jul  7 18:19 bench_threads.cpp
+-rw-------   1 jaten jaten     536 Jul  7 18:19 benign_race.cpp
+-rw-------   1 jaten jaten    5097 Dec 22 07:38 CMakeLists.txt
+-rw-------   1 jaten jaten    1158 Dec 22 07:38 compare_exchange_acquire_fence.cpp
+-rw-------   1 jaten jaten    3264 Jul  7 18:19 compare_exchange.cpp
+-rw-------   1 jaten jaten    1074 Jul  7 18:19 cond.c
+-rw-------   1 jaten jaten    1364 Jul  7 18:19 cond_cancel.c
+-rw-------   1 jaten jaten    1385 Jul  7 18:19 cond_destruction.cpp
+-rw-------   1 jaten jaten     865 Jul  7 18:19 cond_race.cpp
+-rw-------   1 jaten jaten    1250 Jul  7 18:19 cond_version.c
+-rw-------   1 jaten jaten     609 Jul  7 18:19 custom_mutex0.cpp
+-rw-------   1 jaten jaten     854 Jul  7 18:19 custom_mutex1.cpp
+-rw-------   1 jaten jaten     642 Jul  7 18:19 custom_mutex2.cpp
+-rw-------   1 jaten jaten    1031 Jul  7 18:19 custom_mutex3.cpp
+-rw-------   1 jaten jaten     961 Dec 22 07:38 custom_mutex4.cpp
+-rw-------   1 jaten jaten     978 Dec 22 07:38 custom_mutex5.cpp
+-rw-------   1 jaten jaten    1937 Jul  7 18:19 custom_mutex.h
+-rw-------   1 jaten jaten    2328 Dec 22 07:43 cxa_guard_acquire.cpp
+drwx------   2 jaten jaten    4096 Dec 22 07:43 Darwin
+-rw-------   1 jaten jaten   19865 Jul  7 18:19 deadlock_detector_stress_test.cpp
+-rw-------   1 jaten jaten    2266 Dec 22 07:38 debug_alloc_stack.cpp
+-rw-------   1 jaten jaten    4025 Jul  7 18:19 debugging.cpp
+-rw-------   1 jaten jaten    1354 Jul  7 18:19 debug_locate.cpp
+-rw-------   1 jaten jaten    2849 Jul  7 18:19 debug_mutex_bad_unlock.cpp
+-rw-------   1 jaten jaten    1144 Jul  7 18:19 deep_stack1.cpp
+-rw-------   1 jaten jaten     721 Jul  7 18:19 deep_stack2.cpp
+-rw-------   1 jaten jaten     684 Jul  7 18:19 default_options.cpp
+-rwx------   1 jaten jaten     772 Jul  7 18:19 deflake.bash
+-rw-------   1 jaten jaten    1058 Jul  7 18:19 dlclose.cpp
+-rw-------   1 jaten jaten    1302 Jul  7 18:19 dl_iterate_phdr.cpp
+-rw-------   1 jaten jaten    1581 Jul  7 18:19 dtls.c
+-rw-------   1 jaten jaten    4176 Jul  7 18:19 exceptions.cpp
+-rw-------   1 jaten jaten     573 Jul  7 18:19 fd_close_norace2.cpp
+-rw-------   1 jaten jaten     729 Jul  7 18:19 fd_close_norace3.cpp
+-rw-------   1 jaten jaten     683 Jul  7 18:19 fd_close_norace.cpp
+-rw-------   1 jaten jaten     573 Jul  7 18:19 fd_close_race.cpp
+-rw-------   1 jaten jaten    1944 Jul  7 18:19 fd_dup_norace2.cpp
+-rw-------   1 jaten jaten     686 Jul  7 18:19 fd_dup_norace.cpp
+-rw-------   1 jaten jaten     768 Jul  7 18:19 fd_dup_race.cpp
+-rw-------   1 jaten jaten     724 Jul  7 18:19 fd_location_closed.cpp
+-rw-------   1 jaten jaten     692 Jul  7 18:19 fd_location.cpp
+-rw-------   1 jaten jaten     605 Jul  7 18:19 fd_pipe_norace.cpp
+-rw-------   1 jaten jaten     731 Jul  7 18:19 fd_pipe_race.cpp
+-rw-------   1 jaten jaten    1421 Jul  7 18:19 fd_socket_connect_norace.cpp
+-rw-------   1 jaten jaten    1541 Jul  7 18:19 fd_socket_norace.cpp
+-rw-------   1 jaten jaten     717 Jul  7 18:19 fd_socketpair_norace.cpp
+-rw-------   1 jaten jaten     810 Jul  7 18:19 fd_stdout_race.cpp
+-rw-------   1 jaten jaten    1143 Jul  7 18:19 fd_tid_recycled.cpp
+-rw-------   1 jaten jaten    2242 Jul  7 18:19 fiber_asm.cpp
+-rw-------   1 jaten jaten    1766 Jul  7 18:19 fiber_cleanup.cpp
+-rw-------   1 jaten jaten    1144 Jul  7 18:19 fiber_from_thread.cpp
+-rw-------   1 jaten jaten    1911 Jul  7 18:19 fiber_longjmp.cpp
+-rw-------   1 jaten jaten     904 Jul  7 18:19 fiber_race.cpp
+-rw-------   1 jaten jaten     831 Jul  7 18:19 fiber_simple.cpp
+-rw-------   1 jaten jaten    1460 Jul  7 18:19 fiber_two_threads.cpp
+-rw-------   1 jaten jaten    1089 Jul  7 18:19 flush_memory.cpp
+-rw-------   1 jaten jaten     974 Jul  7 18:19 force_background_thread.cpp
+-rw-------   1 jaten jaten     726 Jul  7 18:19 fork_atexit.cpp
+-rw-------   1 jaten jaten     787 Jul  7 18:19 fork_deadlock.cpp
+-rw-------   1 jaten jaten     781 Jul  7 18:19 fork_multithreaded3.cpp
+-rw-------   1 jaten jaten    1904 Jul  7 18:19 fork_multithreaded.cpp
+-rw-------   1 jaten jaten     863 Jul  7 18:19 free_race2.c
+-rw-------   1 jaten jaten     630 Jul  7 18:19 free_race3.c
+-rw-------   1 jaten jaten    1327 Jul  7 18:19 free_race.c
+-rw-------   1 jaten jaten      65 Jul  7 18:19 free_race.c.supp
+-rw-------   1 jaten jaten    1102 Dec 22 07:38 getline_nohang.cpp
+-rw-------   1 jaten jaten     533 Jul  7 18:19 global_race2.cpp
+-rw-------   1 jaten jaten     653 Jul  7 18:19 global_race3.cpp
+-rw-------   1 jaten jaten    1344 Jul  7 18:19 global_race.cpp
+-rw-------   1 jaten jaten     512 Jul  7 18:19 halt_on_error.cpp
+-rw-------   1 jaten jaten     477 Jul  7 18:19 heap_race.cpp
+-rw-------   1 jaten jaten    1760 Jul  7 18:19 ignored-interceptors-mmap.cpp
+-rw-------   1 jaten jaten     637 Jul  7 18:19 ignore_free.cpp
+-rw-------   1 jaten jaten    1383 Dec 22 07:43 ignore_lib0.cpp
+-rw-------   1 jaten jaten      36 Jul  7 18:19 ignore_lib0.cpp.supp
+-rw-------   1 jaten jaten    1576 Jul  7 18:19 ignore_lib1.cpp
+-rw-------   1 jaten jaten      37 Jul  7 18:19 ignore_lib1.cpp.supp
+-rw-------   1 jaten jaten    1124 Jul  7 18:19 ignore_lib2.cpp
+-rw-------   1 jaten jaten      29 Jul  7 18:19 ignore_lib2.cpp.supp
+-rw-------   1 jaten jaten    1638 Dec 22 07:38 ignore_lib3.cpp
+-rw-------   1 jaten jaten      32 Jul  7 18:19 ignore_lib3.cpp.supp
+-rw-------   1 jaten jaten    1371 Jul  7 18:19 ignore_lib4.cpp
+-rw-------   1 jaten jaten    2546 Jul  7 18:19 ignore_lib5.cpp
+-rw-------   1 jaten jaten      37 Jul  7 18:19 ignore_lib5.cpp.supp
+-rw-------   1 jaten jaten    1928 Jul  7 18:19 ignore_lib6.cpp
+-rw-------   1 jaten jaten      35 Jul  7 18:19 ignore_lib6.cpp.supp
+-rw-------   1 jaten jaten     490 Jul  7 18:19 ignore_lib_lib.h
+-rw-------   1 jaten jaten    1284 Jul  7 18:19 ignorelist2.cpp
+-rw-------   1 jaten jaten     658 Jul  7 18:19 ignorelist.cpp
+-rw-------   1 jaten jaten     615 Jul  7 18:19 ignore_malloc.cpp
+-rw-------   1 jaten jaten     602 Jul  7 18:19 ignore_race.cpp
+-rw-------   1 jaten jaten     540 Jul  7 18:19 ignore_sync.cpp
+-rw-------   1 jaten jaten     839 Jul  7 18:19 inlined_memcpy_race2.cpp
+-rw-------   1 jaten jaten     833 Jul  7 18:19 inlined_memcpy_race.cpp
+-rw-------   1 jaten jaten     454 Jul  7 18:19 interface_atomic_test.c
+-rw-------   1 jaten jaten     914 Jul  7 18:19 java_alloc.cpp
+-rw-------   1 jaten jaten    2621 Dec 22 07:38 java_finalizer2.cpp
+-rw-------   1 jaten jaten     726 Jul  7 18:19 java_finalizer.cpp
+-rw-------   1 jaten jaten    2028 Jul  7 18:19 java_find.cpp
+-rw-------   1 jaten jaten    1064 Jul  7 18:19 java.h
+-rw-------   1 jaten jaten    1274 Dec 22 07:38 java_heap_init2.cpp
+-rw-------   1 jaten jaten    1042 Jul  7 18:19 java_heap_init.cpp
+-rw-------   1 jaten jaten     918 Jul  7 18:19 java_lock.cpp
+-rw-------   1 jaten jaten    1095 Jul  7 18:19 java_lock_move.cpp
+-rw-------   1 jaten jaten    1476 Jul  7 18:19 java_lock_rec.cpp
+-rw-------   1 jaten jaten    1345 Jul  7 18:19 java_lock_rec_race.cpp
+-rw-------   1 jaten jaten    2041 Jul  7 18:19 java_move_overlap.cpp
+-rw-------   1 jaten jaten    1500 Jul  7 18:19 java_move_overlap_race.cpp
+-rw-------   1 jaten jaten     700 Jul  7 18:19 java_race.cpp
+-rw-------   1 jaten jaten    1019 Jul  7 18:19 java_race_move.cpp
+-rw-------   1 jaten jaten    1035 Jul  7 18:19 java_race_pc.cpp
+-rw-------   1 jaten jaten     928 Jul  7 18:19 java_rwlock.cpp
+-rw-------   1 jaten jaten    2703 Jul  7 18:19 java_symbolization.cpp
+-rw-------   1 jaten jaten    1385 Jul  7 18:19 java_symbolization_legacy.cpp
+-rw-------   1 jaten jaten    1140 Jul  7 18:19 java_volatile.cpp
+-rw-------   1 jaten jaten    1069 Jul  7 18:19 large_malloc_meta.cpp
+drwx------   2 jaten jaten    4096 Dec 22 07:43 libcxx
+drwx------   2 jaten jaten    4096 Dec 22 07:43 libdispatch
+drwx------   2 jaten jaten    4096 Dec 22 07:43 Linux
+-rw-------   1 jaten jaten    3844 Dec 22 07:43 lit.cfg.py
+-rw-------   1 jaten jaten     737 Jul  7 18:19 lit.site.cfg.py.in
+-rw-------   1 jaten jaten    1716 Jul  7 18:19 load_shared_lib.cpp
+drwx------   2 jaten jaten    4096 Dec 22 09:19 log
+-rw-------   1 jaten jaten     442 Jul  7 18:19 longjmp2.cpp
+-rw-------   1 jaten jaten     867 Jul  7 18:19 longjmp3.cpp
+-rw-------   1 jaten jaten     942 Jul  7 18:19 longjmp4.cpp
+-rw-------   1 jaten jaten     373 Jul  7 18:19 longjmp.cpp
+-rw-------   1 jaten jaten     983 Jul  7 18:19 lots_of_threads.c
+-rw-------   1 jaten jaten     665 Jul  7 18:19 malloc_overflow.cpp
+-rw-------   1 jaten jaten     573 Jul  7 18:19 malloc_stack.cpp
+-rw-------   1 jaten jaten     382 Dec 22 07:38 many_held_mutex.cpp
+-rw-------   1 jaten jaten    1267 Jul  7 18:19 map32bit.cpp
+-rw-------   1 jaten jaten    1088 Jul  7 18:19 memcmp_race.cpp
+-rwx------ 102 jaten jaten 1530088 Dec 22 09:16 memcpy_race
+-rw-------   1 jaten jaten    1141 Jul  7 18:19 memcpy_race.cpp
+-rw-------   1 jaten jaten    1068 Jul  7 18:19 mmap_large.cpp
+-rw-------   1 jaten jaten    1138 Jul  7 18:19 mmap_lots.cpp
+-rw-------   1 jaten jaten    1544 Jul  7 18:19 mmap_stress2.cpp
+-rw-------   1 jaten jaten    1838 Jul  7 18:19 mmap_stress.cpp
+-rw-------   1 jaten jaten    1010 Jul  7 18:19 mop1.c
+-rw-------   1 jaten jaten     864 Jul  7 18:19 mop_with_offset2.cpp
+-rw-------   1 jaten jaten     864 Jul  7 18:19 mop_with_offset.cpp
+-rw-------   1 jaten jaten    1921 Dec 22 07:38 munmap_clear_shadow.c
+-rw-------   1 jaten jaten     826 Jul  7 18:19 munmap_invalid.cpp
+-rw-------   1 jaten jaten    1268 Jul  7 18:19 must_deadlock.cpp
+-rw-------   1 jaten jaten     910 Jul  7 18:19 mutex_annotations.cpp
+-rw-------   1 jaten jaten     583 Jul  7 18:19 mutex_bad_read_lock.cpp
+-rw-------   1 jaten jaten     587 Jul  7 18:19 mutex_bad_read_unlock.cpp
+-rw-------   1 jaten jaten     563 Jul  7 18:19 mutex_bad_unlock.cpp
+-rw-------   1 jaten jaten    1167 Jul  7 18:19 mutex_cycle2.c
+-rw-------   1 jaten jaten    1147 Jul  7 18:19 mutex_cycle_long.c
+-rw-------   1 jaten jaten     740 Jul  7 18:19 mutex_destroy_locked2.cpp
+-rw-------   1 jaten jaten     610 Jul  7 18:19 mutex_destroy_locked.cpp
+-rw-------   1 jaten jaten     733 Jul  7 18:19 mutex_double_lock.cpp
+-rw-------   1 jaten jaten     999 Dec 22 07:38 mutex_held_wrong_context.cpp
+-rw-------   1 jaten jaten     794 Jul  7 18:19 mutex_lock_destroyed.cpp
+-rw-------   1 jaten jaten     992 Jul  7 18:19 mutexset1.cpp
+-rw-------   1 jaten jaten     988 Jul  7 18:19 mutexset2.cpp
+-rw-------   1 jaten jaten    1297 Jul  7 18:19 mutexset3.cpp
+-rw-------   1 jaten jaten    1301 Jul  7 18:19 mutexset4.cpp
+-rw-------   1 jaten jaten    1365 Jul  7 18:19 mutexset5.cpp
+-rw-------   1 jaten jaten    1610 Jul  7 18:19 mutexset6.cpp
+-rw-------   1 jaten jaten    1066 Jul  7 18:19 mutexset7.cpp
+-rw-------   1 jaten jaten    1020 Jul  7 18:19 mutexset8.cpp
+-rw-------   1 jaten jaten     813 Jul  7 18:19 on_exit.cpp
+-rw-------   1 jaten jaten     793 Dec 22 07:43 on_initialize_finalize_hooks.cpp
+-rw-------   1 jaten jaten     124 Jul  7 18:19 pie_test.cpp
+-rw-------   1 jaten jaten     465 Jul  7 18:19 printf-1.c
+-rw-------   1 jaten jaten     941 Jul  7 18:19 print_full_thread_history.cpp
+-rw-------   1 jaten jaten    1197 Jul  7 18:19 pthread_atfork_deadlock2.c
+-rw-------   1 jaten jaten    2372 Dec 22 07:38 pthread_atfork_deadlock3.c
+-rw-------   1 jaten jaten     777 Jul  7 18:19 pthread_atfork_deadlock.c
+-rw-------   1 jaten jaten     975 Jul  7 18:19 pthread_key.cpp
+-rw-------   1 jaten jaten     703 Dec 22 07:38 pthread_mutex_clocklock.cpp
+-rw-------   1 jaten jaten     746 Jul  7 18:19 race_on_barrier2.c
+-rw-------   1 jaten jaten     656 Jul  7 18:19 race_on_barrier.c
+-rw-------   1 jaten jaten     568 Jul  7 18:19 race_on_fputs.cpp
+-rw-------   1 jaten jaten    1089 Jul  7 18:19 race_on_heap.cpp
+-rw-------   1 jaten jaten     535 Jul  7 18:19 race_on_mutex2.c
+-rw-------   1 jaten jaten    1176 Jul  7 18:19 race_on_mutex.c
+-rw-------   1 jaten jaten     560 Jul  7 18:19 race_on_puts.cpp
+-rw-------   1 jaten jaten     932 Jul  7 18:19 race_on_read.cpp
+-rw-------   1 jaten jaten     651 Jul  7 18:19 race_on_speculative_load.cpp
+-rw-------   1 jaten jaten     785 Jul  7 18:19 race_on_write.cpp
+-rw-------   1 jaten jaten     984 Jul  7 18:19 race_range_pc.cpp
+-rw-------   1 jaten jaten     507 Jul  7 18:19 race_stress.cpp
+-rw-------   1 jaten jaten     602 Jul  7 18:19 race_top_suppression1.cpp
+-rw-------   1 jaten jaten     596 Jul  7 18:19 race_top_suppression.cpp
+-rw-------   1 jaten jaten    1000 Jul  7 18:19 race_with_finished_thread.cpp
+-rw-------   1 jaten jaten    5284 Jul  7 18:19 real_deadlock_detector_stress_test.cpp
+-rw-------   1 jaten jaten    1369 Jul  7 18:19 restore_stack.cpp
+-rw-------   1 jaten jaten     718 Jul  7 18:19 setuid2.c
+-rw-------   1 jaten jaten    2445 Jul  7 18:19 signal_block2.cpp
+-rw-------   1 jaten jaten    1559 Dec 22 07:38 signal_block.cpp
+-rw-------   1 jaten jaten    1209 Jul  7 18:19 signal_cond.cpp
+-rw-------   1 jaten jaten    1322 Jul  7 18:19 signal_errno.cpp
+-rw-------   1 jaten jaten     502 Jul  7 18:19 signal_exit.cpp
+-rw-------   1 jaten jaten    2064 Dec 22 07:38 signal_in_mutex_lock.cpp
+-rw-------   1 jaten jaten    1369 Dec 22 07:38 signal_in_read.c
+-rw-------   1 jaten jaten    1875 Jul  7 18:19 signal_longjmp.cpp
+-rw-------   1 jaten jaten    1085 Jul  7 18:19 signal_malloc.cpp
+-rw-------   1 jaten jaten     728 Jul  7 18:19 signal_pause.cpp
+-rw-------   1 jaten jaten    4247 Dec 22 07:38 signal_recursive.cpp
+-rw-------   1 jaten jaten    1636 Dec 22 07:38 signal_reset.cpp
+-rw-------   1 jaten jaten    1842 Jul  7 18:19 signal_sync2.cpp
+-rw-------   1 jaten jaten    1079 Jul  7 18:19 signal_sync.cpp
+-rw-------   1 jaten jaten    1531 Dec 22 07:38 signal_thread2.cpp
+-rw-------   1 jaten jaten     983 Jul  7 18:19 signal_thread.cpp
+-rw-------   1 jaten jaten    1970 Jul  7 18:19 signal_thread_sigctx_race.cpp
+-rw-------   1 jaten jaten     644 Jul  7 18:19 signal_write.cpp
+-rw-------   1 jaten jaten    1106 Jul  7 18:19 sigsuspend.cpp
+-rw-------   1 jaten jaten     538 Jul  7 18:19 simple_race.c
+-rw-------   1 jaten jaten     596 Jul  7 18:19 simple_race.cpp
+-rw-------   1 jaten jaten    1435 Jul  7 18:19 simple_stack2.cpp
+-rw-------   1 jaten jaten    3265 Jul  7 18:19 simple_stack.c
+-rw-------   1 jaten jaten     477 Jul  7 18:19 sleep_sync2.cpp
+-rw-------   1 jaten jaten     687 Jul  7 18:19 sleep_sync.cpp
+-rw-------   1 jaten jaten     551 Jul  7 18:19 stack_race2.cpp
+-rw-------   1 jaten jaten     458 Dec 22 07:38 stack_race3.cpp
+-rw-------   1 jaten jaten     439 Jul  7 18:19 stack_race.cpp
+-rw-------   1 jaten jaten    1899 Jul  7 18:19 stack_sync_reuse.cpp
+-rw-------   1 jaten jaten     526 Jul  7 18:19 static_init1.cpp
+-rw-------   1 jaten jaten     613 Jul  7 18:19 static_init2.cpp
+-rw-------   1 jaten jaten     797 Jul  7 18:19 static_init3.cpp
+-rw-------   1 jaten jaten     657 Jul  7 18:19 static_init4.cpp
+-rw-------   1 jaten jaten     792 Jul  7 18:19 static_init5.cpp
+-rw-------   1 jaten jaten     792 Jul  7 18:19 static_init6.cpp
+-rw-------   1 jaten jaten     635 Jul  7 18:19 static_init7.cpp
+-rw-------   1 jaten jaten     910 Jul  7 18:19 strerror_r.cpp
+-rw-------   1 jaten jaten    2805 Jul  7 18:19 stress.cpp
+-rw-------   1 jaten jaten     552 Jul  7 18:19 sunrpc.cpp
+-rw-------   1 jaten jaten     603 Jul  7 18:19 suppressions_global.cpp
+-rw-------   1 jaten jaten      17 Jul  7 18:19 suppressions_global.cpp.supp
+-rw-------   1 jaten jaten     481 Jul  7 18:19 suppressions_mutex.cpp
+-rw-------   1 jaten jaten      21 Jul  7 18:19 suppressions_mutex.cpp.supp
+-rw-------   1 jaten jaten     650 Jul  7 18:19 suppressions_race2.cpp
+-rw-------   1 jaten jaten      14 Jul  7 18:19 suppressions_race2.cpp.supp
+-rw-------   1 jaten jaten     650 Jul  7 18:19 suppressions_race.cpp
+-rw-------   1 jaten jaten      14 Jul  7 18:19 suppressions_race.cpp.supp
+-rw-------   1 jaten jaten     478 Jul  7 18:19 suppress_same_address.cpp
+-rw-------   1 jaten jaten     542 Jul  7 18:19 suppress_same_stacks.cpp
+-rw-------   1 jaten jaten    4372 Jul  7 18:19 test.h
+-rw-------   1 jaten jaten     630 Jul  7 18:19 thread_detach2.c
+-rw-------   1 jaten jaten     399 Jul  7 18:19 thread_detach.c
+-rw-------   1 jaten jaten     418 Jul  7 18:19 thread_end_with_ignore2.cpp
+-rw-------   1 jaten jaten     792 Jul  7 18:19 thread_end_with_ignore3.cpp
+-rw-------   1 jaten jaten     596 Jul  7 18:19 thread_end_with_ignore.cpp
+-rw-------   1 jaten jaten     523 Jul  7 18:19 thread_exit.c
+-rw-------   1 jaten jaten     325 Jul  7 18:19 thread_leak2.c
+-rw-------   1 jaten jaten     447 Jul  7 18:19 thread_leak3.c
+-rw-------   1 jaten jaten     343 Jul  7 18:19 thread_leak4.c
+-rw-------   1 jaten jaten     527 Jul  7 18:19 thread_leak5.c
+-rw-------   1 jaten jaten     326 Jul  7 18:19 thread_leak.c
+-rw-------   1 jaten jaten    1046 Jul  7 18:19 thread_name2.cpp
+-rw-------   1 jaten jaten    1235 Jul  7 18:19 thread_name.cpp
+-rw-------   1 jaten jaten     404 Jul  7 18:19 tiny_race.c
+-rw-------   1 jaten jaten     883 Jul  7 18:19 tls_race2.cpp
+-rw-------   1 jaten jaten     719 Jul  7 18:19 tls_race.cpp
+-rw-------   1 jaten jaten     789 Jul  7 18:19 tsan-vs-gvn.cpp
+-rw-------   1 jaten jaten    1951 Jul  7 18:19 unaligned_norace.cpp
+-rw-------   1 jaten jaten    3300 Jul  7 18:19 unaligned_race.cpp
+drwx------   2 jaten jaten    4096 Dec 22 07:43 Unit
+-rw-------   1 jaten jaten    3080 Jul  7 18:19 vector_race.cpp
+-rw-------   1 jaten jaten    1122 Jul  7 18:19 vfork.cpp
+-rw-------   1 jaten jaten     474 Jul  7 18:19 virtual_inheritance_compile_bug.cpp
+-rw-------   1 jaten jaten    1053 Jul  7 18:19 vptr_benign_race.cpp
+-rw-------   1 jaten jaten     843 Jul  7 18:19 vptr_harmful_race2.cpp
+-rw-------   1 jaten jaten     880 Jul  7 18:19 vptr_harmful_race3.cpp
+-rw-------   1 jaten jaten     534 Jul  7 18:19 vptr_harmful_race4.cpp
+-rw-------   1 jaten jaten     843 Jul  7 18:19 vptr_harmful_race.cpp
+-rw-------   1 jaten jaten     960 Jul  7 18:19 write_in_reader_lock.cpp
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $
+
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $ lh
+-rw-------   1 jaten jaten 1.4K Dec 22 07:43 ignore_lib0.cpp
+drwx------   2 jaten jaten 4.0K Dec 22 07:43 Darwin/
+-rw-------   1 jaten jaten 2.3K Dec 22 07:43 cxa_guard_acquire.cpp
+-rw-------   1 jaten jaten  793 Dec 22 07:43 on_initialize_finalize_hooks.cpp
+-rw-------   1 jaten jaten 3.8K Dec 22 07:43 lit.cfg.py
+drwx------   2 jaten jaten 4.0K Dec 22 07:43 libdispatch/
+drwx------   2 jaten jaten 4.0K Dec 22 07:43 libcxx/
+-rwx------ 102 jaten jaten 1.5M Dec 22 09:16 memcpy_race*
+drwx------   8 jaten jaten  16K Dec 22 09:18 ./
+drwx------   2 jaten jaten 4.0K Dec 22 09:19 log/
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $ cd log
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/log (llvmorg-21.1.8) $ ls
+log.1    log.18  log.27  log.36  log.45  log.54  log.63  log.72  log.81  log.90
+log.10   log.19  log.28  log.37  log.46  log.55  log.64  log.73  log.82  log.91
+log.100  log.2   log.29  log.38  log.47  log.56  log.65  log.74  log.83  log.92
+log.11   log.20  log.3   log.39  log.48  log.57  log.66  log.75  log.84  log.93
+log.12   log.21  log.30  log.4   log.49  log.58  log.67  log.76  log.85  log.94
+log.13   log.22  log.31  log.40  log.5   log.59  log.68  log.77  log.86  log.95
+log.14   log.23  log.32  log.41  log.50  log.6   log.69  log.78  log.87  log.96
+log.15   log.24  log.33  log.42  log.51  log.60  log.7   log.79  log.88  log.97
+log.16   log.25  log.34  log.43  log.52  log.61  log.70  log.8   log.89  log.98
+log.17   log.26  log.35  log.44  log.53  log.62  log.71  log.80  log.9   log.99
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/log (llvmorg-21.1.8) $ ls -al
+total 1132
+drwx------ 2 jaten jaten  4096 Dec 22 09:19 .
+drwx------ 8 jaten jaten 16384 Dec 22 09:18 ..
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.1
+-rw------- 1 jaten jaten 10063 Dec 22 09:18 log.10
+-rw------- 1 jaten jaten 10097 Dec 22 09:19 log.100
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.11
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.12
+-rw------- 1 jaten jaten  2410 Dec 22 09:18 log.13
+-rw------- 1 jaten jaten 10129 Dec 22 09:18 log.14
+-rw------- 1 jaten jaten 10115 Dec 22 09:18 log.15
+-rw------- 1 jaten jaten 10019 Dec 22 09:18 log.16
+-rw------- 1 jaten jaten 10043 Dec 22 09:18 log.17
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.18
+-rw------- 1 jaten jaten 10053 Dec 22 09:18 log.19
+-rw------- 1 jaten jaten 10057 Dec 22 09:18 log.2
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.20
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.21
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.22
+-rw------- 1 jaten jaten 10077 Dec 22 09:18 log.23
+-rw------- 1 jaten jaten  2410 Dec 22 09:18 log.24
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.25
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.26
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.27
+-rw------- 1 jaten jaten 10053 Dec 22 09:18 log.28
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.29
+-rw------- 1 jaten jaten 10067 Dec 22 09:18 log.3
+-rw------- 1 jaten jaten 10093 Dec 22 09:18 log.30
+-rw------- 1 jaten jaten  2410 Dec 22 09:18 log.31
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.32
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.33
+-rw------- 1 jaten jaten 10077 Dec 22 09:18 log.34
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.35
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.36
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.37
+-rw------- 1 jaten jaten 10085 Dec 22 09:18 log.38
+-rw------- 1 jaten jaten 10115 Dec 22 09:18 log.39
+-rw------- 1 jaten jaten 10083 Dec 22 09:18 log.4
+-rw------- 1 jaten jaten 10093 Dec 22 09:18 log.40
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.41
+-rw------- 1 jaten jaten  2411 Dec 22 09:18 log.42
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.43
+-rw------- 1 jaten jaten  2411 Dec 22 09:18 log.44
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.45
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.46
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.47
+-rw------- 1 jaten jaten  2411 Dec 22 09:18 log.48
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.49
+-rw------- 1 jaten jaten  2410 Dec 22 09:18 log.5
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.50
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.51
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.52
+-rw------- 1 jaten jaten 10053 Dec 22 09:18 log.53
+-rw------- 1 jaten jaten 10067 Dec 22 09:18 log.54
+-rw------- 1 jaten jaten 10035 Dec 22 09:18 log.55
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.56
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.57
+-rw------- 1 jaten jaten 10109 Dec 22 09:18 log.58
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.59
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.6
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.60
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.61
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.62
+-rw------- 1 jaten jaten 10129 Dec 22 09:18 log.63
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.64
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.65
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.66
+-rw------- 1 jaten jaten 10101 Dec 22 09:18 log.67
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.68
+-rw------- 1 jaten jaten  2411 Dec 22 09:18 log.69
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.7
+-rw------- 1 jaten jaten 10079 Dec 22 09:19 log.70
+-rw------- 1 jaten jaten 10093 Dec 22 09:19 log.71
+-rw------- 1 jaten jaten 10107 Dec 22 09:19 log.72
+-rw------- 1 jaten jaten 10107 Dec 22 09:19 log.73
+-rw------- 1 jaten jaten 10079 Dec 22 09:19 log.74
+-rw------- 1 jaten jaten 10123 Dec 22 09:19 log.75
+-rw------- 1 jaten jaten 10137 Dec 22 09:19 log.76
+-rw------- 1 jaten jaten 10097 Dec 22 09:19 log.77
+-rw------- 1 jaten jaten 10057 Dec 22 09:19 log.78
+-rw------- 1 jaten jaten 10129 Dec 22 09:19 log.79
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.8
+-rw------- 1 jaten jaten 10093 Dec 22 09:19 log.80
+-rw------- 1 jaten jaten 10137 Dec 22 09:19 log.81
+-rw------- 1 jaten jaten 10123 Dec 22 09:19 log.82
+-rw------- 1 jaten jaten 10067 Dec 22 09:19 log.83
+-rw------- 1 jaten jaten  2410 Dec 22 09:19 log.84
+-rw------- 1 jaten jaten 10123 Dec 22 09:19 log.85
+-rw------- 1 jaten jaten 10123 Dec 22 09:19 log.86
+-rw------- 1 jaten jaten 10137 Dec 22 09:19 log.87
+-rw------- 1 jaten jaten 10107 Dec 22 09:19 log.88
+-rw------- 1 jaten jaten 10137 Dec 22 09:19 log.89
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.9
+-rw------- 1 jaten jaten  2410 Dec 22 09:19 log.90
+-rw------- 1 jaten jaten 10109 Dec 22 09:19 log.91
+-rw------- 1 jaten jaten  2410 Dec 22 09:19 log.92
+-rw------- 1 jaten jaten 10067 Dec 22 09:19 log.93
+-rw------- 1 jaten jaten 10079 Dec 22 09:19 log.94
+-rw------- 1 jaten jaten 10129 Dec 22 09:19 log.95
+-rw------- 1 jaten jaten 10137 Dec 22 09:19 log.96
+-rw------- 1 jaten jaten 10123 Dec 22 09:19 log.97
+-rw------- 1 jaten jaten 10083 Dec 22 09:19 log.98
+-rw------- 1 jaten jaten 10049 Dec 22 09:19 log.99
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/log (llvmorg-21.1.8) $ ls -alS
+total 1132
+drwx------ 8 jaten jaten 16384 Dec 22 09:18 ..
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.21
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.33
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.36
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.45
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.49
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.50
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.52
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.59
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.60
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.61
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.62
+-rw------- 1 jaten jaten 10137 Dec 22 09:19 log.76
+-rw------- 1 jaten jaten 10137 Dec 22 09:18 log.8
+-rw------- 1 jaten jaten 10137 Dec 22 09:19 log.81
+-rw------- 1 jaten jaten 10137 Dec 22 09:19 log.87
+-rw------- 1 jaten jaten 10137 Dec 22 09:19 log.89
+-rw------- 1 jaten jaten 10137 Dec 22 09:19 log.96
+-rw------- 1 jaten jaten 10129 Dec 22 09:18 log.14
+-rw------- 1 jaten jaten 10129 Dec 22 09:18 log.63
+-rw------- 1 jaten jaten 10129 Dec 22 09:19 log.79
+-rw------- 1 jaten jaten 10129 Dec 22 09:19 log.95
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.11
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.18
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.22
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.27
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.29
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.35
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.46
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.64
+-rw------- 1 jaten jaten 10123 Dec 22 09:18 log.7
+-rw------- 1 jaten jaten 10123 Dec 22 09:19 log.75
+-rw------- 1 jaten jaten 10123 Dec 22 09:19 log.82
+-rw------- 1 jaten jaten 10123 Dec 22 09:19 log.85
+-rw------- 1 jaten jaten 10123 Dec 22 09:19 log.86
+-rw------- 1 jaten jaten 10123 Dec 22 09:19 log.97
+-rw------- 1 jaten jaten 10115 Dec 22 09:18 log.15
+-rw------- 1 jaten jaten 10115 Dec 22 09:18 log.39
+-rw------- 1 jaten jaten 10109 Dec 22 09:18 log.58
+-rw------- 1 jaten jaten 10109 Dec 22 09:19 log.91
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.20
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.37
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.41
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.43
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.51
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.57
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.6
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.66
+-rw------- 1 jaten jaten 10107 Dec 22 09:19 log.72
+-rw------- 1 jaten jaten 10107 Dec 22 09:19 log.73
+-rw------- 1 jaten jaten 10107 Dec 22 09:19 log.88
+-rw------- 1 jaten jaten 10107 Dec 22 09:18 log.9
+-rw------- 1 jaten jaten 10101 Dec 22 09:18 log.67
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.1
+-rw------- 1 jaten jaten 10097 Dec 22 09:19 log.100
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.12
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.25
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.26
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.32
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.47
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.56
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.65
+-rw------- 1 jaten jaten 10097 Dec 22 09:18 log.68
+-rw------- 1 jaten jaten 10097 Dec 22 09:19 log.77
+-rw------- 1 jaten jaten 10093 Dec 22 09:18 log.30
+-rw------- 1 jaten jaten 10093 Dec 22 09:18 log.40
+-rw------- 1 jaten jaten 10093 Dec 22 09:19 log.71
+-rw------- 1 jaten jaten 10093 Dec 22 09:19 log.80
+-rw------- 1 jaten jaten 10085 Dec 22 09:18 log.38
+-rw------- 1 jaten jaten 10083 Dec 22 09:18 log.4
+-rw------- 1 jaten jaten 10083 Dec 22 09:19 log.98
+-rw------- 1 jaten jaten 10079 Dec 22 09:19 log.70
+-rw------- 1 jaten jaten 10079 Dec 22 09:19 log.74
+-rw------- 1 jaten jaten 10079 Dec 22 09:19 log.94
+-rw------- 1 jaten jaten 10077 Dec 22 09:18 log.23
+-rw------- 1 jaten jaten 10077 Dec 22 09:18 log.34
+-rw------- 1 jaten jaten 10067 Dec 22 09:18 log.3
+-rw------- 1 jaten jaten 10067 Dec 22 09:18 log.54
+-rw------- 1 jaten jaten 10067 Dec 22 09:19 log.83
+-rw------- 1 jaten jaten 10067 Dec 22 09:19 log.93
+-rw------- 1 jaten jaten 10063 Dec 22 09:18 log.10
+-rw------- 1 jaten jaten 10057 Dec 22 09:18 log.2
+-rw------- 1 jaten jaten 10057 Dec 22 09:19 log.78
+-rw------- 1 jaten jaten 10053 Dec 22 09:18 log.19
+-rw------- 1 jaten jaten 10053 Dec 22 09:18 log.28
+-rw------- 1 jaten jaten 10053 Dec 22 09:18 log.53
+-rw------- 1 jaten jaten 10049 Dec 22 09:19 log.99
+-rw------- 1 jaten jaten 10043 Dec 22 09:18 log.17
+-rw------- 1 jaten jaten 10035 Dec 22 09:18 log.55
+-rw------- 1 jaten jaten 10019 Dec 22 09:18 log.16
+drwx------ 2 jaten jaten  4096 Dec 22 09:19 .
+-rw------- 1 jaten jaten  2411 Dec 22 09:18 log.42
+-rw------- 1 jaten jaten  2411 Dec 22 09:18 log.44
+-rw------- 1 jaten jaten  2411 Dec 22 09:18 log.48
+-rw------- 1 jaten jaten  2411 Dec 22 09:18 log.69
+-rw------- 1 jaten jaten  2410 Dec 22 09:18 log.13
+-rw------- 1 jaten jaten  2410 Dec 22 09:18 log.24
+-rw------- 1 jaten jaten  2410 Dec 22 09:18 log.31
+-rw------- 1 jaten jaten  2410 Dec 22 09:18 log.5
+-rw------- 1 jaten jaten  2410 Dec 22 09:19 log.84
+-rw------- 1 jaten jaten  2410 Dec 22 09:19 log.90
+-rw------- 1 jaten jaten  2410 Dec 22 09:19 log.92
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/log (llvmorg-21.1.8) $ ../memcpy_race 
+addr1=0x720400000003 
+addr2=0x720400000005 
+==================
+WARNING: ThreadSanitizer: data race (pid=2611508)
+  Write of size 4 at 0x720400000003 by thread T2:
+    #0 __tsan_memcpy <null> (memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 Thread2(void*) /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:19:3 (memcpy_race+0xe0dd1) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Previous write of size 1 at 0x720400000005 by thread T1:
+    #0 __tsan_memcpy <null> (memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 Thread1(void*) /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:11:3 (memcpy_race+0xe0d35) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Location is heap block of size 10 at 0x720400000000 allocated by main thread:
+    #0 operator new[](unsigned long) <null> (memcpy_race+0xdfcfb) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 __cxx_global_var_init /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:5:14 (memcpy_race+0x2f384) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #2 _GLOBAL__sub_I_memcpy_race.cpp /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp (memcpy_race+0x2f384)
+    #3 call_init csu/../csu/libc-start.c:145:3 (libc.so.6+0x2a303) (BuildId: 274eec488d230825a136fa9c4d85370fed7a0a5e)
+
+  Thread T2 (tid=2611511, running) created by main thread at:
+    #0 pthread_create <null> (memcpy_race+0x6068f) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 main /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:29:3 (memcpy_race+0xe0ea2) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Thread T1 (tid=2611510, finished) created by main thread at:
+    #0 pthread_create <null> (memcpy_race+0x6068f) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 main /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:28:3 (memcpy_race+0xe0e8a) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+SUMMARY: ThreadSanitizer: data race (/mnt/oldrog/home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3) in __tsan_memcpy
+==================
+ThreadSanitizer: reported 1 warnings
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/log (llvmorg-21.1.8) $ cd ..
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $ mv log /home/jaten/go/src/github.com/glycerine/rr_binary_for_issue74019/no_go/
+jaten@rog ~/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan (llvmorg-21.1.8) $

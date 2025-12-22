@@ -1,0 +1,29 @@
+addr1=0x720400000003 
+addr2=0x720400000005 
+==================
+WARNING: ThreadSanitizer: data race (pid=2609225)
+  Write of size 4 at 0x720400000003 by thread T2:
+    #0 __tsan_memcpy <null> (memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 Thread2(void*) /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:19:3 (memcpy_race+0xe0dd1) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Previous write of size 1 at 0x720400000005 by thread T1:
+    #0 __tsan_memcpy <null> (memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 Thread1(void*) /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:11:3 (memcpy_race+0xe0d35) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Location is heap block of size 10 at 0x720400000000 allocated by main thread:
+    #0 operator new[](unsigned long) <null> (memcpy_race+0xdfcfb) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 __cxx_global_var_init /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:5:14 (memcpy_race+0x2f384) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #2 _GLOBAL__sub_I_memcpy_race.cpp /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp (memcpy_race+0x2f384)
+    #3 call_init csu/../csu/libc-start.c:145:3 (libc.so.6+0x2a303) (BuildId: 274eec488d230825a136fa9c4d85370fed7a0a5e)
+
+  Thread T2 (tid=2609244, running) created by main thread at:
+    #0 pthread_create <null> (memcpy_race+0x6068f) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 main /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:29:3 (memcpy_race+0xe0ea2) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+  Thread T1 (tid=2609243, running) created by main thread at:
+    #0 pthread_create <null> (memcpy_race+0x6068f) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+    #1 main /home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race.cpp:28:3 (memcpy_race+0xe0e8a) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3)
+
+SUMMARY: ThreadSanitizer: data race (/mnt/oldrog/home/jaten/go/src/github.com/llvm/llvm-project/compiler-rt/test/tsan/memcpy_race+0x5c5bf) (BuildId: 901b09c578206854f1261c9fd984eb3005d4b5d3) in __tsan_memcpy
+==================
+ThreadSanitizer: reported 1 warnings
